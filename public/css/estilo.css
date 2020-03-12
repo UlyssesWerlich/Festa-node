@@ -13,7 +13,7 @@ body {
     float: left;
 }
 
-.itens{
+.link{
     width: 150px;
     padding: 10px;
 }
@@ -37,7 +37,7 @@ img{
     height: 300px ;
 }
 
-.itens:hover{
+.link:hover{
     background-color:white;
     color: black;
 }

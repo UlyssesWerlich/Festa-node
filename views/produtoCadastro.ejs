@@ -6,20 +6,38 @@
     <body>
         <%- include('../partials/menu.ejs') %>
 
-<!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
+        <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
 
-        <div class="formulario">
+        <div class='title'>
+            <h1>Cadastro de Cliente</h1>
+        </div>
+
+        <div class="forms">
             <form name="form2" method="POST" action="/edit">
-                <p>Produto<br/>
-                    <input type="text" name="produto"></p>  
-                <p>Marca<br/>
-                    <input type="text" name="marca"></p>  
-                <p>Preço<br/>
-                    <input type="text" name="preco"></p> 
-                <p>Código de Barras<br/>
-                    <input type="text" name="codigoBarras"></p>
-                <p>Descrição<br>
-                    <input class="text" name="descricao"></p>   
+                <div class='linha'>
+                    <label class='label' for='nomeProduto'>Produto</label>
+                    <input type='text' id='nomeProduto' name='nomeProduto'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='tipoProduto'>Tipo de Produto</label>
+                    <input type='text' id='tipoProduto' name='tipoProduto'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='temaProduto'>Temática do Produto</label>
+                    <input type='text' id='temaProduto' name='temaProduto'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='precoProduto'>Preço</label>
+                    <input type='text' id='precoProduto' name='precoProduto'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='descricaoProduto'>Descrição do Produto</label>
+                    <input type='text' id='descricaoProduto' name='descricaoProduto'/>
+                </div>
 
                 <input type="submit" name="Botao" value="Cadastrar">
             </form>

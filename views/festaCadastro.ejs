@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../partials/header.ejs') %>
+    </head>
+    <body>
+        <%- include('../partials/menu.ejs') %>
+
+        <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
+
+        <div class='title'>
+            <h1>Cadastro de Festa</h1>
+        </div>
+        <div class='forms'>
+            <form methor='POST' action='/festaConsulta'> 
+
+                <div class='linha'>
+                    <label class='label' for='dataFesta'>Data da festa</label>
+                    <input type='date' id='dataFesta' name='dataFesta'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='horaMontagem'>Horário de entrega</label>
+                    <input type='text' id='horaMontagem' name='horaMontagem'/>
+
+                    <label class='label' for='horaDesmontagem'>Horário de desmontagem</label>
+                    <input type='text' id='horaDesmontagem' name='horaDesmontagem'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='cep'>CEP</label>
+                    <input type='text' id='cepF' name='cep'/>                
+                    
+                    <label class='label' for='uf'>UF</label>
+                    <select id="uf" name="uf">
+                        <option value=""></option>
+                        <option value="SC">SC</option>
+                        <option value="RS">RS</option>
+                        <option value="PR">PR</option>
+                    </select>
+
+                    <label class='label' for='cidade'>Cidade</label>
+                    <input type='text' id='cidade' name='cidade'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='endereco'>Endereço</label>
+                    <input type='text' id='endereco' name='endereco'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='cpfCliente'>CPF do Cliente</label>
+                    <input type='text' id='cpfCliente' name='cpfCliente'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='telefone'>Telefone</label>
+                    <input type='text' id='telefone' name='telefone'/>
+                    
+                    <label class='label' for='celular'>Celular</label>
+                    <input type='text' id='celular' name='celular'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='email'>E-mail</label>
+                    <input type='text' id='email' name='email'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='valorFesta'>Valor da Festa</label>
+                    <input type='text' id='valorFesta' name='valorFesta'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='observacao'>Observação</label>
+                    <input type='text' id='observacao' name='observacao'/>
+                </div>
+
+                <div class='linha'>
+                    <input type='submit' id='submit' name='cadastro'/>
+                </div>
+            
+            </form>
+        </div>
+        <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO ------------------------- -->
+
+    </body>
+    <footer>
+        <%- include('../partials/footer.ejs') %>
+    </footer>
+</html>

@@ -42,10 +42,14 @@ app.get('/clienteConsulta', (req, res) =>{
     res.render('clienteConsulta.ejs')
 })
 
-app.get('/compraCadastro', (req, res) =>{
-    res.render('compraCadastro.ejs')
+app.get('/festaCadastro', (req, res) =>{
+    res.render('festaCadastro.ejs')
 })
 
-app.get('/compraConsulta', (req, res) =>{
-    res.render('compraConsulta.ejs')
+app.get('/festaConsulta', (req, res) =>{
+    res.render('festaConsulta.ejs')
+})
+
+app.get('/agenda', (req, res) =>{
+    res.render('agenda.ejs')
 })
