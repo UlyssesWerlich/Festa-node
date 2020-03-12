@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../partials/header.ejs') %>
+    </head>
+    <body>
+        <%- include('../partials/menu.ejs') %>
+
+<!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
+
+        <div class="formulario">
+            <form name="form2" method="POST" action="/edit">
+                <p>Produto<br/>
+                    <input type="text" name="produto"></p>  
+                <p>Marca<br/>
+                    <input type="text" name="marca"></p>  
+                <p>Preço<br/>
+                    <input type="text" name="preco"></p> 
+                <p>Código de Barras<br/>
+                    <input type="text" name="codigoBarras"></p>
+                <p>Descrição<br>
+                    <input class="text" name="descricao"></p>   
+
+                <input type="submit" name="Botao" value="Cadastrar">
+            </form>
+        </div>
+    </body>
+    <footer>
+        <%- include('../partials/footer.ejs') %>
+    </footer>
+</html>
