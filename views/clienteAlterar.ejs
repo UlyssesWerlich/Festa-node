@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../partials/header.ejs') %>
+    </head>
+    <body>
+        <%- include('../partials/menu.ejs') %>
+
+        <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
+        <div class='title'>
+            <h1>Cadastro de Cliente</h1>
+        </div>
+        <% 
+        data.forEach(function(details) { %>
+        <div class='forms'>
+            <form method='POST' action='/clienteAlterar/<%= details._id %>'> 
+                <div class='linha'>
+                    <label class='label' for='nome'>Nome</label>
+                    <input type='text' value="<%= details.nome %>" id='nome' name='nome'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='cpf'>CPF</label>
+                    <input type='text' value="<%= details.cpf %>" id='cpf' name='cpf'/>
+
+                    <label class='label' for='dataNascimento'>Data de Nascimento</label>
+                    <input type='text' value="<%= details.dataNascimento %>" id='dataNascimento' name='dataNascimento'/>
+                </div>
+                
+                <div class='linha'>
+                    <label class='label' for='telefone'>Telefone</label>
+                    <input type='text' value="<%= details.telefone %>" id='telefone' name='telefone'/>
+                    
+                    <label class='label' for='celular'>Celular</label>
+                    <input type='text' value="<%= details.celular %>" id='celular' name='celular'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='email'>E-mail</label>
+                    <input type='text' value="<%= details.email %>" id='email' name='email'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='cep'>CEP</label>
+                    <input type='text' value="<%= details.cep %>" id='cep' name='cep'/>                
+                    
+                    <label class='label' for='uf'>UF</label>
+                    <select id="uf" name="uf">
+                        <!--value="<%= details.uf %>"-->
+                        <option value=""></option>
+                        <option value="SC"><!--selected-->SC</option>
+                        <option value="RS">RS</option>
+                        <option value="PR">PR</option>
+                    </select>
+
+                    <label class='label' for='cidade'>Cidade</label>
+                    <input type='text' value="<%= details.cidade %>" id='cidade' name='cidade'/>
+                </div>
+
+                <div class='linha'>
+                    <label class='label' for='endereco'>Endereço</label>
+                    <input type='text' value="<%= details.endereco %>" id='endereco' name='endereco'/>
+                </div>
+
+                <div class='linha'>
+                    <input type='submit' id='submit' value='Alterar' name='alterar'/>
+
+                    <button><a href="/delete/<%= details._id %>">Excluir</a></button>
+                </div>
+            </form>
+        </div>
+        <% }) %>
+        <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO ------------------------- -->
+    </body>
+    <footer>
+        <%- include('../partials/footer.ejs') %>
+    </footer>
+</html>

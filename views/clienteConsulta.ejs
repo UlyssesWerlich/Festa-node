@@ -6,10 +6,42 @@
     <body>
         <%- include('../partials/menu.ejs') %>
         <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
+        <div class='title'>
+            <h1>Consulta de Cliente</h1>
+        </div>
+        <div class='forms'>
+            <form method="POST" action='/clienteConsulta'>
+                <div class='linha'>
+                    <label class='label' for='nomeConsulta'>Consulta de Nome</label>
+                    <input type='text' id='nomeConsulta' name='nomeConsulta'/>
 
-
-
-
+                    <input type='submit' id='submit' value='Consultar' name='consulta'/>
+                </div>
+            </form>
+        </div>
+        <div class='table'>
+            <table border='1'>
+                <thead>
+                    <tr>
+                        <td>Nome</td>
+                        <td>CPF</td>
+                        <td>Telefone</td>
+                    </tr>
+                </thead>
+                <tbody>
+                <% 
+                    if(data){
+                    data.forEach(function(details) { %>
+                    <tr>
+                        <td><a href='/clienteAlterar/<%= details._id %>'><%= details.nome %></a></td>
+                        <td><%= details.cpf %></td>
+                        <td><%= details.telefone %></td>
+                        <!-- { <td><a href="/edit/<%= details._id %>">Editar</a> - <a href="/delete/<%= details._id %>">Deletar</a></td> -->
+                    </tr>    
+                <% })} %>
+                </tbody>
+            </table>
+        </div>
         <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO -------------------------- -->
     </body>
     <footer>
