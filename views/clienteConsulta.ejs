@@ -34,7 +34,7 @@
                     data.forEach(function(details) { %>
                     <tr>
                         <td><a href='/clienteAlterar/<%= details._id %>'><%= details.nome %></a></td>
-                        <td><%= details.cpf %></td>
+                        <td><a href='/clienteAlterar/<%= details._id %>'><%= details.cpf %></a></td>
                         <td><%= details.telefone %></td>
                         <!-- { <td><a href="/edit/<%= details._id %>">Editar</a> - <a href="/delete/<%= details._id %>">Deletar</a></td> -->
                     </tr>    

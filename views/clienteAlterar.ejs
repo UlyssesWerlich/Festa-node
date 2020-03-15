@@ -8,10 +8,12 @@
 
         <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
         <div class='title'>
-            <h1>Cadastro de Cliente</h1>
+            <h1>Alterar dados de Cliente</h1>
         </div>
         <% 
-        data.forEach(function(details) { %>
+        if(data){
+            data.forEach(function(details) { 
+                %>
         <div class='forms'>
             <form method='POST' action='/clienteAlterar/<%= details._id %>'> 
                 <div class='linha'>
@@ -24,7 +26,7 @@
                     <input type='text' value="<%= details.cpf %>" id='cpf' name='cpf'/>
 
                     <label class='label' for='dataNascimento'>Data de Nascimento</label>
-                    <input type='text' value="<%= details.dataNascimento %>" id='dataNascimento' name='dataNascimento'/>
+                    <input type='date' value="<%= details.dataNascimento %>" id='dataNascimento' name='dataNascimento'/>
                 </div>
                 
                 <div class='linha'>
@@ -44,11 +46,12 @@
                     <label class='label' for='cep'>CEP</label>
                     <input type='text' value="<%= details.cep %>" id='cep' name='cep'/>                
                     
+                    <input type="hidden" value='<%= details.uf %>' id='hiddenUf' />
                     <label class='label' for='uf'>UF</label>
                     <select id="uf" name="uf">
-                        <!--value="<%= details.uf %>"-->
+                        
                         <option value=""></option>
-                        <option value="SC"><!--selected-->SC</option>
+                        <option value="SC">SC</option>
                         <option value="RS">RS</option>
                         <option value="PR">PR</option>
                     </select>
@@ -65,14 +68,18 @@
                 <div class='linha'>
                     <input type='submit' id='submit' value='Alterar' name='alterar'/>
 
-                    <button><a href="/delete/<%= details._id %>">Excluir</a></button>
+                    <button><a href="/clienteExcluir/<%= details._id %>">Excluir</a></button>
                 </div>
             </form>
         </div>
-        <% }) %>
+        <% })} %>
         <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO ------------------------- -->
     </body>
     <footer>
         <%- include('../partials/footer.ejs') %>
+        <script>
+            var uf = document.getElementById('hiddenUf').value;
+            document.getElementById('uf').value = uf;
+        </script>
     </footer>
 </html>
