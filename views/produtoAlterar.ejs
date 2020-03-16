@@ -7,41 +7,51 @@
         <%- include('../partials/menu.ejs') %>
 
         <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
-
         <div class='title'>
-            <h1>Cadastro de Cliente</h1>
+            <h1>Alterar dados de Produtos</h1>
         </div>
+
+        <%
+            if(data){
+                data.forEach(function(details){ 
+                    
+        %>
 
         <div class="forms">
-            <form name="form2" method="POST" action="/edit">
+            <form name="form2" method="POST" action="/produtoAlterar/<%= details._id %>">
                 <div class='linha'>
-                    <label class='label' for='nomeProduto'>Produto</label>
-                    <input type='text' id='nomeProduto' name='nomeProduto'/>
+                    <label class='label' for='produto'>Produto</label>
+                    <input type='text' value='<%= details.produto %>' id='produto' name='produto'/>
                 </div>
 
                 <div class='linha'>
-                    <label class='label' for='tipoProduto'>Tipo de Produto</label>
-                    <input type='text' id='tipoProduto' name='tipoProduto'/>
+                    <label class='label' for='tipo'>Tipo de Produto</label>
+                    <input type='text' value='<%= details.tipo %>' id='tipo' name='tipo'/>
                 </div>
 
                 <div class='linha'>
-                    <label class='label' for='temaProduto'>Temática do Produto</label>
-                    <input type='text' id='temaProduto' name='temaProduto'/>
+                    <label class='label' for='tema'>Temática do Produto</label>
+                    <input type='text' value='<%= details.tema %>' id='tema' name='tema'/>
                 </div>
 
                 <div class='linha'>
-                    <label class='label' for='precoProduto'>Preço</label>
-                    <input type='text' id='precoProduto' name='precoProduto'/>
+                    <label class='label' for='preco'>Preço</label>
+                    <input type='text' value='<%= details.preco %>' id='preco' name='preco'/>
                 </div>
 
                 <div class='linha'>
-                    <label class='label' for='descricaoProduto'>Descrição do Produto</label>
-                    <input type='text' id='descricaoProduto' name='descricaoProduto'/>
+                    <label class='label' for='descricao'>Descrição do Produto</label>
+                    <input type='text' value='<%= details.descricao %>' id='descricao' name='descricao'/>
                 </div>
 
-                <input type="submit" name="Botao" value="Cadastrar">
+                <div class='linha'>
+                    <input type="submit" name="alterar" value="Alterar">
+
+                    <button><a href="/produtoExcluir/<%= details._id %>">Excluir</a></button>
+                </div>
             </form>
         </div>
+        <% })} %>
     </body>
     <footer>
         <%- include('../partials/footer.ejs') %>

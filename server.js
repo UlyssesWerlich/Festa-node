@@ -147,12 +147,83 @@ app.get('/festaConsulta', (req, res) =>{
 
 //================================= ROTAS RELACIONADAS A PRODUTOS =================================
 
+const schemaProduto = new Schema({
+    produto: {type: String, required: true},
+    tipo: String,
+    tema: String,
+    preco: String,
+    descricao: String
+}, {collection: 'produtos'})
+
+var produtos = mongoose.model( "userData2", schemaProduto)
+
 app.get('/produtoCadastro', (req, res) =>{
+    res.render('produtoCadastro.ejs', {data: false})
+})
+
+app.post('/produtoCadastro', (req, res) =>{
+    var produto = {  
+        produto: req.body.produto,  
+        tipo: req.body.tipo,
+        tema: req.body.tema,
+        preco: req.body.preco,
+        descricao: req.body.descricao
+      };  
+
+      var data = new produtos(produto);  
+      data.save().catch((err) => {
+        return console.log(err)
+    }); 
     res.render('produtoCadastro.ejs')
 })
 
 app.get('/produtoConsulta', (req, res) =>{
-    res.render('produtoConsulta.ejs')
+    res.render('produtoConsulta.ejs', {data: false})
+})
+
+app.post('/produtoConsulta', (req, res) =>{
+    var busca = { "produto": RegExp(req.body.produtoConsulta , 'i')}
+    produtos.find(busca)
+    .then(function(result){
+        res.render('produtoConsulta.ejs', {data: result})
+    }).catch((err) => {
+        return console.log(err)
+        //res.redirect('/clienteConsulta'); 
+    }); 
+})
+
+app.get('/produtoAlterar/:id', (req, res) => {
+    var busca = { "_id": req.params.id}
+    produtos.find(busca)
+    .then(function(result){
+        res.render('produtoAlterar.ejs', {data: result})
+    }).catch((err) => {
+        return console.log(err)
+    })
+})
+
+app.post('/produtoAlterar/:id', (req, res) =>{
+    produtos.updateOne({ "_id": req.params.id}, { 
+        $set: {
+            produto: req.body.produto,  
+            tipo: req.body.tipo,
+            tema: req.body.tema,
+            preco: req.body.preco,
+            descricao: req.body.descricao
+    }}, (err, result) =>{
+        if (err) return res.send(err)
+        res.render('produtoConsulta.ejs', {data: false})
+    }); 
+})
+
+app.get('/produtoExcluir/:id', (req, res) =>{
+    var id = { "_id": req.params.id}
+    produtos.deleteOne(id)
+    .then(function(result){
+        res.render('produtoConsulta.ejs', {data: false})
+    }).catch((err) => {
+        return console.log(err)
+    })
 })
 
 // ================================= ROTAS RELACIONADAS A AGENDA =================================

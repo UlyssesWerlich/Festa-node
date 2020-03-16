@@ -7,7 +7,47 @@
         <%- include('../partials/menu.ejs') %>
 
         <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
+        <div class='title'>
+            <h1>Consulta de Produto</h1>
+        </div>
+        <div class='forms'>
+            <form method="POST" action='/produtoConsulta'>
+                <div class='linha'>
 
+                    <label class='label' for='produtoConsulta'>Nome do produto</label>
+                    <input type='text' id='produtoConsulta' name='produtoConsulta'/>
+
+                    <input type='submit' id='submit' value='Consultar' name='consulta'/>
+
+                </div>
+            </form>
+        </div>
+        <div class='table'>
+            <table border='1'>
+                <thead>
+                    <tr>
+                        <td>Produto</td>
+                        <td>Tipo</td>
+                        <td>Tema</td>
+                        <td>Preço</td>
+                    </tr>
+                </thead>
+                <tbody>
+                <% 
+                    if(data){
+                    data.forEach(function(details) { %>
+                    <tr>
+                        <td><a href='/produtoAlterar/<%= details._id %>'><%= details.produto %></a></td>
+                        <td><%= details.tipo %></td>
+                        <td><%= details.tema %></td>
+                        <td><%= details.preco %></td>
+                    </tr>    
+                <% })} %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO -------------------------- -->
     </body>
     <footer>
         <%- include('../partials/footer.ejs') %>
