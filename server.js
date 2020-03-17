@@ -136,13 +136,104 @@ app.get('/clienteExcluir/:id', (req, res) =>{
 
 //================================= ROTAS RELACIONADAS A FESTA =================================
 
+const schemaFesta = new Schema({
+    dataFesta: {type: String, required: true},
+    horaMontagem: String,
+    horaDesmontagem: String,
+    cep: String,
+    uf: String,
+    cidade: String,
+    endereco: String,
+    cpfCliente: String,
+    nomeCliente: String,
+    valorFesta: String,
+    status: String,
+    observacao: String,
+}, {collection: 'festas'})
+
+var festas = mongoose.model('UserData2', schemaFesta)
 
 app.get('/festaCadastro', (req, res) =>{
-    res.render('festaCadastro.ejs')
+    res.render('festaCadastro.ejs', {info: false})
+})
+
+app.post('/festaCadastro', (req, res) =>{
+    var festa = {  
+        dataFesta: req.body.dataFesta,  
+        horaMontagem: req.body.horaMontagem,
+        horaDesmontagem: req.body.horaDesmontagem,
+        cep: req.body.cep,
+        uf: req.body.uf,
+        cidade: req.body.cidade,
+        endereco: req.body.endereco,
+        cpfCliente: req.body.cpfCliente,
+        nomeCliente: req.body.nomeCliente,
+        valorFesta: req.body.valorFesta,
+        status: req.body.status,
+        observacao: req.body.observacao
+      };  
+
+      var data = new festas(festa);  
+      data.save().catch((err) => {
+        return console.log(err)
+    }); 
+    res.render('festaCadastro.ejs', {info: 1})
 })
 
 app.get('/festaConsulta', (req, res) =>{
-    res.render('festaConsulta.ejs')
+    res.render('festaConsulta.ejs', {data: false})
+})
+
+app.post('/festaConsulta', (req, res) =>{
+    var busca = { "status": RegExp(req.body.statusConsulta , 'i')}
+    festas.find(busca)
+    .then(function(result){
+        res.render('festaConsulta.ejs', {data: result})
+    }).catch((err) => {
+        return console.log(err)
+        //res.redirect('/clienteConsulta'); 
+    }); 
+})
+
+app.get('/festaAlterar/:id', (req, res) => {
+    var busca = { "_id": req.params.id}
+    festas.find(busca)
+    .then(function(result){
+        res.render('festaAlterar.ejs', {data: result})
+    }).catch((err) => {
+        return console.log(err)
+    })
+})
+
+app.post('/festaAlterar/:id', (req, res) =>{
+    festas.updateOne({ "_id": req.params.id}, { 
+        $set: {
+            dataFesta: req.body.dataFesta,  
+            horaMontagem: req.body.horaMontagem,
+            horaDesmontagem: req.body.horaDesmontagem,
+            cep: req.body.cep,
+            uf: req.body.uf,
+            cidade: req.body.cidade,
+            endereco: req.body.endereco,
+            cpfCliente: req.body.cpfCliente,
+            nomeCliente: req.body.nomeCliente,
+            valorFesta: req.body.valorFesta,
+            status: req.body.status,
+            observacao: req.body.observacao
+    }}, (err, result) =>{
+        if (err) return res.send(err)
+        res.render('festaConsulta.ejs', {data: false})
+    }); 
+})
+
+app.get('/festaExcluir/:id', (req, res) =>{
+    var id = { "_id": req.params.id}
+    festas.deleteOne(id)
+    .then(function(result){
+        res.render('festaConsulta.ejs', {data: false})
+    }).catch((err) => {
+        return console.log(err)
+    })
 })
 
 //================================= ROTAS RELACIONADAS A PRODUTOS =================================

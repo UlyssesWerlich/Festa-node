@@ -28,6 +28,9 @@
                         <td>Nome</td>
                         <td>CPF</td>
                         <td>Telefone</td>
+                        <td>Celular</td>
+                        <td>UF</td>
+                        <td>Cidade</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,6 +41,9 @@
                         <td><a href='/clienteAlterar/<%= details._id %>'><%= details.nome %></a></td>
                         <td><a href='/clienteAlterar/<%= details._id %>'><%= details.cpf %></a></td>
                         <td><%= details.telefone %></td>
+                        <td><%= details.celular %></td>
+                        <td><%= details.uf %></td>
+                        <td><%= details.cidade %></td>
                     </tr>    
                 <% })} %>
                 </tbody>

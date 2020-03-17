@@ -12,7 +12,7 @@
             <h1>Cadastro de Festa</h1>
         </div>
         <div class='forms'>
-            <form methor='POST' action='/festaConsulta'> 
+            <form method='POST' action='/festaCadastro'> 
 
                 <div class='linha'>
                     <label class='label' for='dataFesta'>Data da festa</label>
@@ -27,7 +27,7 @@
 
                 <div class='linha'>
                     <label class='label' for='cep'>CEP</label>
-                    <input type='text' id='cepF' name='cep'/>                
+                    <input type='text' id='cep' name='cep'/>                
                     
                     <label class='label' for='uf'>UF</label>
                     <select id="uf" name="uf">
@@ -49,19 +49,11 @@
                 <div class='linha'>
                     <label class='label' for='cpfCliente'>CPF do Cliente</label>
                     <input type='text' id='cpfCliente' name='cpfCliente'/>
-                </div>
 
-                <div class='linha'>
-                    <label class='label' for='telefone'>Telefone</label>
-                    <input type='text' id='telefone' name='telefone'/>
-                    
-                    <label class='label' for='celular'>Celular</label>
-                    <input type='text' id='celular' name='celular'/>
-                </div>
+                    <label class='label' for='nomeCliente'>Nome</label>
+                    <input type='text' id='nomeCliente' name='nomeCliente'/>
 
-                <div class='linha'>
-                    <label class='label' for='email'>E-mail</label>
-                    <input type='text' id='email' name='email'/>
+                    <button href='#'>Consultar</button>
                 </div>
 
                 <div class='linha'>
@@ -84,7 +76,7 @@
                 </div>
 
                 <div class='linha'>
-                    <input type='submit' id='submit' name='cadastro'/>
+                    <input type='submit' id='submit' value='Cadastrar' name='cadastro'/>
                 </div>
             
             </form>
@@ -93,6 +85,11 @@
 
     </body>
     <footer>
-        <%- include('../partials/footer.ejs') %>
+        <%- include('../partials/footer.ejs') %> 
+
+        <%
+        if(info == 1){ %>
+            <script> alert("Festa cadastrada com sucesso");</script>
+        <% } %>
     </footer>
 </html>

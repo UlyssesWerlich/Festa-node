@@ -7,7 +7,55 @@
         <%- include('../partials/menu.ejs') %>
 
         <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
+        <div class='title'>
+            <h1>Consulta de Festa</h1>
+        </div>
+        <div class='forms'>
+            <form method="POST" action='/festaConsulta'>
+                <div class='linha'>
 
+                    <label class='label' for='statusConsulta'>Status da festa</label>
+                    <select id="statusConsulta" name="statusConsulta">
+                        <option value=""></option>
+                        <option value="A">Agendado</option>
+                        <option value="P">Pago</option>
+                        <option value="E">Entregue</option>
+                        <option value="F">Fechado</option>
+                    </select>
+
+                    <input type='submit' id='submit' value='Consultar' name='consulta'/>
+
+                </div>
+            </form>
+        </div>
+        <div class='table'>
+            <table border='1'>
+                <thead>
+                    <tr>
+                        <td>Data da Festa</td>
+                        <td>UF</td>
+                        <td>Cidade</td>
+                        <td>Endereço</td>
+                        <td>Cliente</td>
+                        <td>Valor</td>
+                    </tr>
+                </thead>
+                <tbody>
+                <% 
+                    if(data){
+                    data.forEach(function(details) { %>
+                    <tr>
+                        <td><a href='/festaAlterar/<%= details._id %>'><%= details.dataFesta %></a></td>
+                        <td><a href='/festaAlterar/<%= details._id %>'><%= details.uf %></a></td>
+                        <td><%= details.cidade %></td>
+                        <td><%= details.endereco %></td>
+                        <td><%= details.nomeCliente %></td>
+                        <td><%= details.valorFesta %></td>
+                    </tr>    
+                <% })} %>
+                </tbody>
+            </table>
+        </div>
         <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO ------------------------- -->
 
     </body>
