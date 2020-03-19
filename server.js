@@ -236,6 +236,21 @@ app.get('/festaExcluir/:id', (req, res) =>{
     })
 })
 
+app.get('/festaAdicionarItens/:id', (req, res) => {
+    var busca = { "_id": req.params.id}
+    festas.find(busca)
+    .then(function(result){
+        res.render('festaAdicionarItens.ejs', {data: result})
+    }).catch((err) => {
+        return console.log(err)
+    })
+})
+
+app.post('/festaAdicionarItens/:id', (req,res) => {
+
+
+})
+
 //================================= ROTAS RELACIONADAS A PRODUTOS =================================
 
 const schemaProduto = new Schema({
