@@ -246,10 +246,23 @@ app.get('/festaAdicionarItens/:id', (req, res) => {
     })
 })
 
+
 app.post('/festaAdicionarItens/:id', (req,res) => {
 
-
 })
+
+app.get('/ajaxFestaItens/:consultaItem', (req,res) =>{
+    var busca = { "produto": RegExp(req.params.consultaItem , 'i')}
+    console.log(busca);
+    produtos.find(busca)
+    .then(function(result){
+        res.render('../ajax/ajaxFestaItens.ejs', {data: result})
+    }).catch((err) => {
+        return console.log(err)
+        //res.redirect('/clienteConsulta'); 
+    }); 
+})
+
 
 //================================= ROTAS RELACIONADAS A PRODUTOS =================================
 

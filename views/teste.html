@@ -1,0 +1,26 @@
+<input type='text' id='teste' />
+<button type='button' onclick='insereValor()'>Inserir</button>
+
+<span id='valores'></span>
+
+<script>
+    var array = ['1', '2', '3'];
+
+    function insereValor(){
+        var valor = document.querySelector('#teste').value;
+
+        var igual = false;
+        array.forEach(valorArray => {
+            if (valorArray == valor)
+                igual = true;        
+        });
+        if (!igual) {
+            array.push(valor);
+        } else {
+            alert('valor dublicado');
+        }
+
+        document.querySelector('#teste').value = '';
+        document.querySelector('#valores').innerHTML = array.join(', ');
+    }
+</script>

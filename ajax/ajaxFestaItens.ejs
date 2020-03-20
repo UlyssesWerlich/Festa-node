@@ -1,0 +1,16 @@
+<%
+if(data){
+    data.forEach(function(details) { 
+        %>
+        <tr>
+            <td><button onclick="adicionarLinha('<%= details._id %>', 
+                                                '<%= details.produto %>', 
+                                                '<%= details.tipo %>',
+                                                '<%= details.tema %>', 
+                                                '<%= details.preco %>')">Adicionar</button></td>
+            <td><%= details.produto %></td>
+            <td><%= details.tipo %></td>
+            <td><%= details.tema %></td>
+            <td><%= details.preco %></td>
+        </tr>
+<%  })} %>

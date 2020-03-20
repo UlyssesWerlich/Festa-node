@@ -1,0 +1,268 @@
+[
+	{
+		"idItem" : 19,
+		"nome" : "Castelo Inflável",
+		"preco" : 500.00,
+		"descricao" : "Castelo inflável (M)",
+		"ativo" : 0
+	},
+	{
+		"idItem" : 20,
+		"nome" : "Castelo Inflável",
+		"preco" : 550.00,
+		"descricao" : "Castelo Inflável (G)",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 21,
+		"nome" : "Pula Pula (P)",
+		"preco" : 200.00,
+		"descricao" : "Pula Pula 3x3m",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 22,
+		"nome" : "Pula Pula (M)",
+		"preco" : 350.00,
+		"descricao" : "Pula Pula 4x4 m",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 23,
+		"nome" : "Pula Pula (G)",
+		"preco" : 500.00,
+		"descricao" : "Pula Pula 5x5 m",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 24,
+		"nome" : "Piscina de bolinhas circular (P)",
+		"preco" : 150.00,
+		"descricao" : "Piscina de bolinhas 3x3 metros circular",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 25,
+		"nome" : "Piscina de bolinhas quadrado (P)",
+		"preco" : 225.00,
+		"descricao" : "Piscina de Bolinhas 3x3 m quadrado",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 26,
+		"nome" : "Piscina de bolinhas quadrado (M) ",
+		"preco" : 250.00,
+		"descricao" : "Piscina de bolinhas quadrado 4x4 m",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 27,
+		"nome" : "Piscina de bolinhas circular (G)",
+		"preco" : 300.00,
+		"descricao" : "Piscina de bolinhas circular 5x5 m",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 28,
+		"nome" : "Piscina de bolinhas quadrado (G)",
+		"preco" : 350.00,
+		"descricao" : "Piscina de bolinhas circular 5x5 m",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 29,
+		"nome" : "Piscina de bolinhas circular (M)",
+		"preco" : 250.00,
+		"descricao" : "Piscina de bolinhas 4x4m circular",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 30,
+		"nome" : "Boneco Olaf",
+		"preco" : 100.00,
+		"descricao" : "Boneco 1m Olaf",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 31,
+		"nome" : "Boneco Elsa",
+		"preco" : 150.00,
+		"descricao" : "Boneco 1,5m Elsa",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 32,
+		"nome" : "Boneco Cavalo branco",
+		"preco" : 150.00,
+		"descricao" : "Boneco de cavalo branco montável",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 33,
+		"nome" : "Fantasia Elsa",
+		"preco" : 50.00,
+		"descricao" : "Fantasia completa Elsa",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 34,
+		"nome" : "Banner Rei Leão",
+		"preco" : 70.00,
+		"descricao" : "Banner Rei Leão 100cm x 70cm",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 35,
+		"nome" : "Boneco Simba",
+		"preco" : 150.00,
+		"descricao" : "Boneco montável Simba 1m",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 36,
+		"nome" : "Piscina de bolinhas Pequena Sereia",
+		"preco" : 400.00,
+		"descricao" : "Piscina de bolinhas Pequena Sereia 5x5",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 37,
+		"nome" : "Fonte de Chocolate (P)",
+		"preco" : 300.00,
+		"descricao" : "Fonte de Chocolate 50cm altura por 30cm largura",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 38,
+		"nome" : "Fonte de chocolate (M)",
+		"preco" : 350.00,
+		"descricao" : "Fonte de chocolate 75cm altura x 50cm largura",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 39,
+		"nome" : "Fonte de Chocolate (G)",
+		"preco" : 450.00,
+		"descricao" : "Fonte de chocolate 100cm altura x 70cm largura",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 40,
+		"nome" : "Boneco Timão e Pumba",
+		"preco" : 150.00,
+		"descricao" : "Boneco Timão e Pumba 1m",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 41,
+		"nome" : "Gerador de bolha de sabão",
+		"preco" : 300.00,
+		"descricao" : "Gerador de bolhas de sabão",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 42,
+		"nome" : "Boneco Nala (Rei Leão)",
+		"preco" : 150.00,
+		"descricao" : "Boneco Nala (Rei Leão) 1m",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 43,
+		"nome" : "Carroça de brinquedo (P)",
+		"preco" : 600.00,
+		"descricao" : "Carroça de Brinquedo p/ 1 pessoa",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 44,
+		"nome" : "Carroça de brinquedo (M)",
+		"preco" : 680.00,
+		"descricao" : "Carroça de Brinquedo p/ 2 pessoas",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 45,
+		"nome" : "Carroça de Brinquedo (G)",
+		"preco" : 750.00,
+		"descricao" : "Carroça de Brinquedo p/ 4 pessoa",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 46,
+		"nome" : "Escorregador inflável (P)",
+		"preco" : 500.00,
+		"descricao" : "Escorregador inflável 3m x 3m",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 47,
+		"nome" : "Escorregador inflável (M)",
+		"preco" : 650.00,
+		"descricao" : "Escorregador inflável 4m x 4m",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 48,
+		"nome" : "Escorregador inflável (G)",
+		"preco" : 700.00,
+		"descricao" : "Escorregador inflável 5m x 5m",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 49,
+		"nome" : "Escorregador inflável Frozen (M)",
+		"preco" : 700.00,
+		"descricao" : "Escorregador inflável Frozen 4 x 4",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 50,
+		"nome" : "Escorregador inflável Pequena Sereia (G)",
+		"preco" : 750.00,
+		"descricao" : "Escorregador inflável Pequena Sereia 5m x 5m",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 51,
+		"nome" : "Pula Pula Rei Leão (G)",
+		"preco" : 550.00,
+		"descricao" : "Pula Pula Rei Leão 5m x 5m",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 52,
+		"nome" : "Batalha de bastão Rei Leão",
+		"preco" : 560.00,
+		"descricao" : "Campo inflável p/ batalha de bastão 5m x 5m Rei Leão",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 53,
+		"nome" : "Paredão escalada Rei Leão (P)",
+		"preco" : 700.00,
+		"descricao" : "Paredão de escalada Rei Leão 3m altura x 2 m largura",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 54,
+		"nome" : "Paredão de escalada Rei Leão (G)",
+		"preco" : 900.00,
+		"descricao" : "Paredão de escalada Rei Leão 6m altura x 4 m largura",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 55,
+		"nome" : "Fantasia Ariel Pequena Sereia",
+		"preco" : 90.00,
+		"descricao" : "Fantasia Ariel Pequena Sereia c/ vestido, tiara e sapato",
+		"ativo" : 1
+	},
+	{
+		"idItem" : 56,
+		"nome" : "Escorregador (P)",
+		"preco" : 150.00,
+		"descricao" : "Escorregador 1 metro",
+		"ativo" : 1
+	}
+]

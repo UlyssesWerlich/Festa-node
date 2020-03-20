@@ -26,17 +26,39 @@
         </div>
         
         <div class='subtitle'>
+            <h3>Consulta de itens</h3>
+        </div>
+
+        <table border=1>
+            <thead>
+                <tr>
+                    <th><input type='text' onkeyup='getDados()' id='consultaItem' placeholder="Mínimo 3 caracteres"/></th>
+                    <th>Item</th>
+                    <th>Tipo</th>
+                    <th>Tema</th>
+                    <th>Preço</th>
+                </tr>
+            </thead>
+            <tbody id='resultado'>
+                
+            </tbody>
+        </table>
+
+
+        <br/><br/>
+
+        <div class='subtitle'>
             <h3>Lista de itens</h3>
         </div>
-        <button onclick="adicionarLinha()">Adicionar Linha</button>
         <form>
             <input type='hidden' name='id' value='<%= details._id %>' />
             <table id='listaDeItens' border='1'> 
                 <thead>
                     <tr>
+                        <th>Ação</th>
                         <th>Item</th>
-                        <th>Tema</th>
                         <th>Tipo</th>
+                        <th>Tema</th>
                         <th>Preço</th>
                     </tr>
                 </thead>
@@ -50,21 +72,47 @@
     </body>
     <footer>
         <%- include('../partials/footer.ejs') %>
+        <script src='/js/request.js'></script>
         <script>
-            function adicionarLinha() {
-
+            function adicionarLinha(id, produto, tipo, tema, preco) {
+                var tabela = document.getElementById('lista');
                 var linha = document.createElement('tr');
                 linha.insertCell(0).innerHTML = "<button onclick='removerLinha(this)'>Remover</button>"; //d.getElementsByName('user')[0].value;
-                linha.insertCell(1).innerHTML = "Certo"; //d.getElementsByName('senha')[0].value;
-                linha.insertCell(2).innerHTML = "Linha"; //d.getElementsByName('senha')[0].value;
-                linha.insertCell(3).innerHTML = "Adicionada"; //d.getElementsByName('senha')[0].value;
+                linha.insertCell(1).innerHTML = "<input type='hidden' name='id' value='" + id + "'/>" + produto; //d.getElementsByName('senha')[0].value;
+                linha.insertCell(2).innerHTML = tipo; //d.getElementsByName('senha')[0].value;
+                linha.insertCell(3).innerHTML = tema; //d.getElementsByName('senha')[0].value;
+                linha.insertCell(4).innerHTML = preco; //d.getElementsByName('senha')[0].value;
                 document.getElementById('lista').appendChild(linha);
                 return false;
             }
+
             function removerLinha(linha){
                 var i=linha.parentNode.parentNode.rowIndex;
                 document.getElementById('listaDeItens').deleteRow(i);
             }
+            
+            function getDados(){
+                var item =  document.getElementById("consultaItem").value;
+                
+                if (item.length > 2) {
+                    var result = document.getElementById("resultado");
+                    var xmlreq = CriarRequest();
+
+                    xmlreq.open("GET", "/ajaxFestaItens/" + item /*"&turmaConsulta=" + turma +"&turnoConsulta=" + turno*/, true);
+                    xmlreq.onreadystatechange = function(){
+
+                    if (xmlreq.status == 200)
+                        result.innerHTML = xmlreq.responseText;
+                    else 
+                        result.innerHTML = "Erro: " + xmlreq.statusText;
+                        
+                    };
+                    xmlreq.send(null);
+                } else {
+                    document.getElementById("resultado").innerHTML = '';
+                }
+            }
+
         </script>
     </footer>
 </html>
