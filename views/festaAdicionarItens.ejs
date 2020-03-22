@@ -50,12 +50,12 @@
         <div class='subtitle'>
             <h3>Lista de itens</h3>
         </div>
-        <form>
+        <form method='POST' action='/festaAdicionarItens/'>
             <input type='hidden' name='id' value='<%= details._id %>' />
             <table id='listaDeItens' border='1'> 
                 <thead>
                     <tr>
-                        <th>Ação</th>
+                        <th><input type='submit' value='Atualizar Lista' name='botao'/></th>
                         <th>Item</th>
                         <th>Tipo</th>
                         <th>Tema</th>
@@ -63,6 +63,19 @@
                     </tr>
                 </thead>
                 <tbody id='lista'>
+<%
+if(details.itens){
+    details.itens.forEach(function(item) { %>
+
+        <tr>
+            <td><button onclick='removerLinha(this)'>Remover</button></th>
+            <td><input type='hidden' name='ids[]' value='<%= item._id %>'/><input type='hidden' name='itens[]' value='<%= item.item %>'/><%= item.item %></td>
+            <td><input type='hidden' name='tipo[]' value='<%= item.tipo %>'/><%= item.tipo %></td>
+            <td><input type='hidden' name='tema[]' value='<%= item.tema %>'/><%= item.tema %></td>
+            <td><input type='hidden' name='preco[]' value='<%= item.preco %>'/><%= item.preco %></td>
+        </tr>
+        
+<% })} %>
 
                 </tbody>
             </table>
@@ -74,14 +87,15 @@
         <%- include('../partials/footer.ejs') %>
         <script src='/js/request.js'></script>
         <script>
-            function adicionarLinha(id, produto, tipo, tema, preco) {
+            function adicionarLinha(id, item, tipo, tema, preco) {
                 var tabela = document.getElementById('lista');
                 var linha = document.createElement('tr');
-                linha.insertCell(0).innerHTML = "<button onclick='removerLinha(this)'>Remover</button>"; //d.getElementsByName('user')[0].value;
-                linha.insertCell(1).innerHTML = "<input type='hidden' name='id' value='" + id + "'/>" + produto; //d.getElementsByName('senha')[0].value;
-                linha.insertCell(2).innerHTML = tipo; //d.getElementsByName('senha')[0].value;
-                linha.insertCell(3).innerHTML = tema; //d.getElementsByName('senha')[0].value;
-                linha.insertCell(4).innerHTML = preco; //d.getElementsByName('senha')[0].value;
+                linha.insertCell(0).innerHTML = "<button onclick='removerLinha(this)'>Remover</button>"; 
+                linha.insertCell(1).innerHTML = "<input type='hidden' name='ids[]' value='" + id + "'/>" + 
+                                                "<input type='hidden' name='itens[]' value='" + item + "'/>" + item; 
+                linha.insertCell(2).innerHTML = "<input type='hidden' name='tipo[]' value='" + tipo + "'/>" + tipo; 
+                linha.insertCell(3).innerHTML = "<input type='hidden' name='tema[]' value='" + tema + "'/>" + tema;
+                linha.insertCell(4).innerHTML = "<input type='hidden' name='preco[]' value='" + preco + "'/>" + preco;
                 document.getElementById('lista').appendChild(linha);
                 return false;
             }
@@ -98,7 +112,7 @@
                     var result = document.getElementById("resultado");
                     var xmlreq = CriarRequest();
 
-                    xmlreq.open("GET", "/ajaxFestaItens/" + item /*"&turmaConsulta=" + turma +"&turnoConsulta=" + turno*/, true);
+                    xmlreq.open("GET", "/ajaxFestaItens/" + item, true);
                     xmlreq.onreadystatechange = function(){
 
                     if (xmlreq.status == 200)

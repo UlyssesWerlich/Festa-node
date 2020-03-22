@@ -8,14 +8,14 @@
 
         <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
         <div class='title'>
-            <h1>Consulta de Produto</h1>
+            <h1>Consulta de item</h1>
         </div>
         <div class='forms'>
-            <form method="POST" action='/produtoConsulta'>
+            <form method="POST" action='/itemConsulta'>
                 <div class='linha'>
 
-                    <label class='label' for='produtoConsulta'>Nome do Item</label>
-                    <input type='text' id='produtoConsulta' name='produtoConsulta'/>
+                    <label class='label' for='itemConsulta'>Nome do Item</label>
+                    <input type='text' id='itemConsulta' name='itemConsulta'/>
 
                     <input type='submit' id='submit' value='Consultar' name='consulta'/>
 
@@ -26,7 +26,7 @@
             <table border='1'>
                 <thead>
                     <tr>
-                        <td>Produto</td>
+                        <td>Item</td>
                         <td>Tipo</td>
                         <td>Tema</td>
                         <td>Preço</td>
@@ -37,7 +37,7 @@
                     if(data){
                     data.forEach(function(details) { %>
                     <tr>
-                        <td><a href='/produtoAlterar/<%= details._id %>'><%= details.produto %></a></td>
+                        <td><a href='/itemAlterar/<%= details._id %>'><%= details.item %></a></td>
                         <td><%= details.tipo %></td>
                         <td><%= details.tema %></td>
                         <td><%= details.preco %></td>

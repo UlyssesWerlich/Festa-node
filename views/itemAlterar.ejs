@@ -8,7 +8,7 @@
 
         <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
         <div class='title'>
-            <h1>Alterar dados de Produtos</h1>
+            <h1>Editar Item</h1>
         </div>
 
         <%
@@ -18,19 +18,19 @@
         %>
 
         <div class="forms">
-            <form name="form2" method="POST" action="/produtoAlterar/<%= details._id %>">
+            <form name="form2" method="POST" action="/itemAlterar/<%= details._id %>">
                 <div class='linha'>
-                    <label class='label' for='produto'>Produto</label>
-                    <input type='text' value='<%= details.produto %>' id='produto' name='produto'/>
+                    <label class='label' for='item'>Item</label>
+                    <input type='text' value='<%= details.item %>' id='item' name='item'/>
                 </div>
 
                 <div class='linha'>
-                    <label class='label' for='tipo'>Tipo de Produto</label>
+                    <label class='label' for='tipo'>Tipo de item</label>
                     <input type='text' value='<%= details.tipo %>' id='tipo' name='tipo'/>
                 </div>
 
                 <div class='linha'>
-                    <label class='label' for='tema'>Temática do Produto</label>
+                    <label class='label' for='tema'>Temática do item</label>
                     <input type='text' value='<%= details.tema %>' id='tema' name='tema'/>
                 </div>
 
@@ -40,14 +40,14 @@
                 </div>
 
                 <div class='linha'>
-                    <label class='label' for='descricao'>Descrição do Produto</label>
+                    <label class='label' for='descricao'>Descrição do item</label>
                     <input type='text' value='<%= details.descricao %>' id='descricao' name='descricao'/>
                 </div>
 
                 <div class='linha'>
                     <input type="submit" name="alterar" value="Alterar">
 
-                    <button><a href="/produtoExcluir/<%= details._id %>">Excluir</a></button>
+                    <button><a href="/itemExcluir/<%= details._id %>">Excluir</a></button>
                 </div>
             </form>
         </div>

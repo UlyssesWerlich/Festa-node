@@ -71,7 +71,6 @@ app.post('/clienteConsulta', (req, res) =>{
         res.render('clienteConsulta.ejs', {data: result})
     }).catch((err) => {
         return console.log(err)
-        //res.redirect('/clienteConsulta'); 
     }); 
 })
 
@@ -86,23 +85,6 @@ app.get('/clienteAlterar/:id', (req, res) =>{
 })
 
 app.post('/clienteAlterar/:id', (req, res) =>{ 
-    
-    /*cliente = {  
-        $set: {
-            nome: req.body.nome,  
-            cpf: req.body.cpf,
-            dataNascimento: req.body.dataNascimento,
-            telefone: req.body.telefone,
-            celular: req.body.celular,
-            email: req.body.email,
-            cep: req.body.cep,
-            uf: req.body.uf,
-            cidade: req.body.cidade,
-            endereco: req.body.endereco,
-            __v: 0
-        }
-    };  
-    var data = new clientes(cliente);  */
     
     clientes.updateOne({ "_id": req.params.id}, { 
         $set: {
@@ -149,6 +131,13 @@ const schemaFesta = new Schema({
     valorFesta: String,
     status: String,
     observacao: String,
+    itens: [{ id: String,
+             item: String,
+             tipo: String,
+             tema: String,
+             preco: String
+    }]
+
 }, {collection: 'festas'})
 
 var festas = mongoose.model('UserData2', schemaFesta)
@@ -237,8 +226,8 @@ app.get('/festaExcluir/:id', (req, res) =>{
 })
 
 app.get('/festaAdicionarItens/:id', (req, res) => {
-    var busca = { "_id": req.params.id}
-    festas.find(busca)
+    var id = { "_id": req.params.id}
+    festas.find(id)
     .then(function(result){
         res.render('festaAdicionarItens.ejs', {data: result})
     }).catch((err) => {
@@ -247,99 +236,118 @@ app.get('/festaAdicionarItens/:id', (req, res) => {
 })
 
 
-app.post('/festaAdicionarItens/:id', (req,res) => {
+app.post('/festaAdicionarItens/', (req,res) => {
+    ids = req.body.ids;
+    nomes = req.body.itens;
+    tipo = req.body.tipo;
+    tema = req.body.tema;
+    preco = req.body.preco;
 
+    listaItens = [];
+    for (var i = 0; i < ids.length; i++){
+        listaItens.push({
+            _id: ids[i],
+            item: nomes[i],
+            tipo: tipo[i],
+            tema: tema[i],
+            preco: preco[i],
+        })
+    }
+
+    festas.updateOne({"_id": req.body.id}, {$set: {"itens": listaItens}})
+    .then(function(result){
+        res.render('festaConsulta.ejs', {data: false})
+    }).catch((err) => {
+        return console.log(err)
+    })
 })
 
 app.get('/ajaxFestaItens/:consultaItem', (req,res) =>{
-    var busca = { "produto": RegExp(req.params.consultaItem , 'i')}
-    console.log(busca);
-    produtos.find(busca)
+    var busca = { "item": RegExp(req.params.consultaItem , 'i')}
+    itens.find(busca).limit(4)
     .then(function(result){
         res.render('../ajax/ajaxFestaItens.ejs', {data: result})
     }).catch((err) => {
         return console.log(err)
-        //res.redirect('/clienteConsulta'); 
     }); 
 })
 
 
-//================================= ROTAS RELACIONADAS A PRODUTOS =================================
+//================================= ROTAS RELACIONADAS A itens =================================
 
-const schemaProduto = new Schema({
-    produto: {type: String, required: true},
+const schemaitem = new Schema({
+    item: {type: String, required: true},
     tipo: String,
     tema: String,
     preco: String,
     descricao: String
-}, {collection: 'produtos'})
+}, {collection: 'itens'})
 
-var produtos = mongoose.model( "userData2", schemaProduto)
+var itens = mongoose.model( "userData2", schemaitem)
 
-app.get('/produtoCadastro', (req, res) =>{
-    res.render('produtoCadastro.ejs', {data: false})
+app.get('/itemCadastro', (req, res) =>{
+    res.render('itemCadastro.ejs', {data: false})
 })
 
-app.post('/produtoCadastro', (req, res) =>{
-    var produto = {  
-        produto: req.body.produto,  
+app.post('/itemCadastro', (req, res) =>{
+    var item = {  
+        item: req.body.item,  
         tipo: req.body.tipo,
         tema: req.body.tema,
         preco: req.body.preco,
         descricao: req.body.descricao
       };  
 
-      var data = new produtos(produto);  
+      var data = new itens(item);  
       data.save().catch((err) => {
         return console.log(err)
     }); 
-    res.render('produtoCadastro.ejs')
+    res.render('itemCadastro.ejs')
 })
 
-app.get('/produtoConsulta', (req, res) =>{
-    res.render('produtoConsulta.ejs', {data: false})
+app.get('/itemConsulta', (req, res) =>{
+    res.render('itemConsulta.ejs', {data: false})
 })
 
-app.post('/produtoConsulta', (req, res) =>{
-    var busca = { "produto": RegExp(req.body.produtoConsulta , 'i')}
-    produtos.find(busca)
+app.post('/itemConsulta', (req, res) =>{
+    var busca = { "item": RegExp(req.body.itemConsulta , 'i')}
+    itens.find(busca)
     .then(function(result){
-        res.render('produtoConsulta.ejs', {data: result})
+        res.render('itemConsulta.ejs', {data: result})
     }).catch((err) => {
         return console.log(err)
-        //res.redirect('/clienteConsulta'); 
     }); 
 })
 
-app.get('/produtoAlterar/:id', (req, res) => {
+app.get('/itemAlterar/:id', (req, res) => {
     var busca = { "_id": req.params.id}
-    produtos.find(busca)
+    itens.find(busca)
     .then(function(result){
-        res.render('produtoAlterar.ejs', {data: result})
+        res.render('itemAlterar.ejs', {data: result})
     }).catch((err) => {
         return console.log(err)
     })
 })
 
-app.post('/produtoAlterar/:id', (req, res) =>{
-    produtos.updateOne({ "_id": req.params.id}, { 
+app.post('/itemAlterar/:id', (req, res) =>{
+    itens.updateOne({ "_id": req.params.id}, { 
         $set: {
-            produto: req.body.produto,  
+            item: req.body.item,  
             tipo: req.body.tipo,
             tema: req.body.tema,
             preco: req.body.preco,
             descricao: req.body.descricao
     }}, (err, result) =>{
         if (err) return res.send(err)
-        res.render('produtoConsulta.ejs', {data: false})
+        res.render('itemConsulta.ejs', {data: false})
     }); 
 })
 
-app.get('/produtoExcluir/:id', (req, res) =>{
+app.get('/itemExcluir/:id', (req, res) =>{
     var id = { "_id": req.params.id}
-    produtos.deleteOne(id)
+    itens.deleteOne(id)
     .then(function(result){
-        res.render('produtoConsulta.ejs', {data: false})
+        res.render('itemConsulta.ejs', {data: false})
     }).catch((err) => {
         return console.log(err)
     })
