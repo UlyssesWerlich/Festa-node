@@ -9,45 +9,48 @@
         <div class='title'>
             <h1>Consulta de Cliente</h1>
         </div>
-        <div class='forms'>
-            <form method="POST" action='/clienteConsulta'>
-                <div class='linha'>
+        <div class='conteudo'>
+            <div class='forms'>
+                <form method="POST" action='/clienteConsulta'>
+                    <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='nomeConsulta'>Consulta de Nome</label>
+                            <input class='campo' type='text' id='nomeConsulta' name='nomeConsulta'/>
+                        </div>
 
-                    <label class='label' for='nomeConsulta'>Consulta de Nome</label>
-                    <input type='text' id='nomeConsulta' name='nomeConsulta'/>
+                        <input type='submit' class='botao botaoConsulta' id='submit' value='Consultar' name='consulta'/>
 
-                    <input type='submit' id='submit' value='Consultar' name='consulta'/>
-
-                </div>
-            </form>
-        </div>
-        <div class='table'>
-            <table border='1'>
-                <thead>
-                    <tr>
-                        <td>Nome</td>
-                        <td>CPF</td>
-                        <td>Telefone</td>
-                        <td>Celular</td>
-                        <td>UF</td>
-                        <td>Cidade</td>
-                    </tr>
-                </thead>
-                <tbody>
-                <% 
-                    if(data){
-                    data.forEach(function(details) { %>
-                    <tr>
-                        <td><a href='/clienteAlterar/<%= details._id %>'><%= details.nome %></a></td>
-                        <td><a href='/clienteAlterar/<%= details._id %>'><%= details.cpf %></a></td>
-                        <td><%= details.telefone %></td>
-                        <td><%= details.celular %></td>
-                        <td><%= details.uf %></td>
-                        <td><%= details.cidade %></td>
-                    </tr>    
-                <% })} %>
-                </tbody>
-            </table>
+                    </div>
+                </form>
+            </div>
+            <div class='table'>
+                <table class='tabela'>
+                    <thead>
+                        <tr class='linhaCabecalho'>
+                            <td>Nome</td>
+                            <td>CPF</td>
+                            <td>Telefone</td>
+                            <td>Celular</td>
+                            <td>UF</td>
+                            <td>Cidade</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% 
+                        if(data){
+                        data.forEach(function(details) { %>
+                        <tr class='linha1'>
+                            <td><a href='/clienteAlterar/<%= details._id %>'><%= details.nome %></a></td>
+                            <td><a href='/clienteAlterar/<%= details._id %>'><%= details.cpf %></a></td>
+                            <td><%= details.telefone %></td>
+                            <td><%= details.celular %></td>
+                            <td><%= details.uf %></td>
+                            <td><%= details.cidade %></td>
+                        </tr>    
+                    <% })} %>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO -------------------------- -->
     </body>

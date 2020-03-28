@@ -1,43 +1,206 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
 body {
-    width: 90%;
-    margin: 30px auto;
     font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+    width: 100vw;
+}
+
+.cabecalho{
+    position: static;
+    height: 80px;
+    background: linear-gradient(to right, #4CA1AF, #C4E0E5);
+}
+
+.cabecalho h1{
+    color: #eeeeee;
+    padding-top: 20px;
+    padding-left: 40px;
+    text-shadow: 1px 1px 1px rgb(63, 138, 150)
 }
 
 .menu{
-    background-color: burlywood;
-    margin: 0 20px 0 0;
-    padding: 10px 20px 80px;
-    width: 200px;
-    height: 300px;
+    background-color: #C4E0E5;
+    margin: 0;
+    padding-bottom: 10px;
+    width: 18%;
+    min-width: 150px;
+    height: 80vh;
     float: left;
 }
 
-.link{
-    width: 150px;
-    padding: 10px;
+a {
+    text-decoration: none;
+}
+a:active {
+    text-decoration: none;
 }
 
-p{
-    text-align: justify;
+a:visited {
+    text-decoration: none;
 }
 
-.formulario{
-    display: inline;
-    clear: left;
+.link {
+    padding-left: 15%;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    padding-right: 0;
+    background-color: #C4E0E5;
+    transition: filter 0.4s;
 }
 
-.campo{
-    background-color: cadetblue;
-    margin: 0 15px;
-    padding: 15px;
+.link:hover {
+    filter: brightness(110%);
 }
 
-img{
-    height: 300px ;
+.link a {
+    font-size: 20px;
+    color: #11A;
 }
 
-.link:hover{
-    background-color:white;
-    color: black;
+.submenu {
+    color: #116;
+    padding-left: 7%;
+    padding-top: 10px;
+    border-top-color: rgb(114, 185, 196);
+    border-top-width: 2px ;
+    border-top-style: solid;
+    background: linear-gradient(to bottom, #8acbd4, #C4E0E5);
 }
+
+.title{
+    background: linear-gradient(to right, #d7eaee, #d4f7e9);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 82%;
+    float: right;
+    margin-bottom: 20px;
+    padding-left: 3%;
+    color: #116;
+}
+
+.conteudo{
+    margin: 0; 
+    width: 82%;
+    float: right;
+    padding: 5px 3%;
+}
+
+.tabela {
+	font-size: 18px;
+	border: solid 1px;
+    width: 95%;
+    border-color: rgba(0, 0, 0, 0.1);
+    border-spacing: 0;
+}
+
+.tabela td {
+    border: solid 1px;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.tabela tr {
+    text-align:center;
+    height: 30px;
+}
+
+.linhaCabecalho{
+    background-color: #3796a5;
+    color: rgb(230, 230, 230);
+}
+
+.linha1{
+    background-color: rgb(220, 241, 241);
+    color: rgb(30, 30, 30);
+}
+
+.linha2{
+    background-color: rgb(127, 177, 199);
+    color: rgb(30, 30, 30);
+}
+
+
+.botao {
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    color: #ffffff;
+    height: 33px;
+    width: 200px;
+    font-size: 18px;
+    transition: filter 0.2s;
+}
+
+.botao a{
+    color: #ffffff;
+}
+
+.botao:hover {
+    filter: brightness(80%);
+}
+
+.botaoAlterar {
+    background-color:  rgb(40, 167, 57);
+}
+
+.botaoConsulta {
+    background-color:  #4CA1AF;
+}
+.botaoExcluir {
+    background-color:  rgb(158, 39, 39);
+}
+
+.linha{
+    margin: 7px;
+    width: 100%;
+}
+
+.conjunto{
+    display: inline-block;
+    padding: 0 7px;
+}
+
+.conjunto label{
+    font-size: 20px;
+}
+
+.campo {
+    border-radius: 5px;
+    border-style: solid;
+    width: 100%;
+    border-width: 2px;
+    border-color: #75bac5;
+    height: 32px;
+    font-size: 17px;
+}
+
+.texto {
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 5px;
+    border-style: solid;
+    width: 100%;
+    border-width: 2px;
+    border-color: #75bac5;
+    height: 80px;
+    font-size: 17px;
+    line-height: 24px;
+    resize: vertical;
+}
+
+.campoTamMax {
+    width: 60%;
+}
+
+.campoTamMed {
+    width: 30%;
+}
+
+.campoTamMin {
+    width: 15%;
+}
+

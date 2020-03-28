@@ -2,8 +2,9 @@
 if(data){
     data.forEach(function(details) { 
         %>
-        <tr>
-            <td><button onclick="adicionarLinha('<%= details._id %>', 
+        <tr class='linha1'>
+            <td><button class='botao botaoConsulta' 
+                        onclick="adicionarLinha('<%= details._id %>', 
                                                 '<%= details.item %>', 
                                                 '<%= details.tipo %>',
                                                 '<%= details.tema %>', 

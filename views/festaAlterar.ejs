@@ -15,81 +15,113 @@
         if(data){
             data.forEach(function(details) { 
                 %>
-        <div class='forms'>
-            <form method='POST' action='/festaAlterar/<%= details._id %>'> 
+        <div class='conteudo'>
+            <div class='forms'>
+                <form method='POST' action='/festaAlterar/<%= details._id %>'> 
 
-                <div class='linha'>
-                    <label class='label' for='dataFesta'>Data da festa</label>
-                    <input type='date' value='<%= details.dataFesta %>' id='dataFesta' name='dataFesta'/>
+                    <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='dataFesta'>Data da festa</label>
+                            <input class='campo' type='date' value='<%= details.dataFesta %>' id='dataFesta' name='dataFesta'/>
+                        </div>
 
-                    <label class='label' for='horaMontagem'>Entrega as</label>
-                    <input type='text' value='<%= details.horaMontagem %>' size='3' placeholder='horas' id='horaMontagem' name='horaMontagem'/>
+                        <div class='conjunto campoTamMin'>
+                            <label class='label' for='horaMontagem'>Entrega</label>
+                            <input class='campo' type='text' value='<%= details.horaMontagem %>' size='3' placeholder='horas' id='horaMontagem' name='horaMontagem'/>
+                        </div>
 
-                    <label class='label' for='horaDesmontagem'>Desmontagem as</label>
-                    <input type='text' value='<%= details.horaDesmontagem %>' size='3' placeholder='horas' id='horaDesmontagem' name='horaDesmontagem'/>
-                </div>
+                        <div class='conjunto campoTamMin'>
+                            <label class='label' for='horaDesmontagem'>Retirada</label>
+                            <input class='campo' type='text' value='<%= details.horaDesmontagem %>' size='3' placeholder='horas' id='horaDesmontagem' name='horaDesmontagem'/>
+                        </div>
+                    </div>
 
-                <div class='linha'>
-                    <label class='label' for='cep'>CEP</label>
-                    <input type='text' value='<%= details.cep %>' id='cep' name='cep'/>                
+                    <div class='linha'>
+                        <div class='conjunto campoTamMin'>
+                            <label class='label' for='cep'>CEP</label>
+                            <input class='campo' type='text' value='<%= details.cep %>' id='cep' name='cep'/> 
+                        </div>               
 
-                    <input type="hidden" value='<%= details.uf %>' id='hiddenUf' />
-                    <label class='label' for='uf'>UF</label>
-                    <select id="uf" name="uf">
-                        <option value=""></option>
-                        <option value="SC">SC</option>
-                        <option value="RS">RS</option>
-                        <option value="PR">PR</option>
-                    </select>
+                        <input type="hidden" value='<%= details.uf %>' id='hiddenUf' />
+                        <div class='conjunto campoTamMin'>
+                            <label class='label' for='uf'>UF</label>
+                            <select class='campo' id="uf" name="uf">
+                                <option value=""></option>
+                                <option value="SC">SC</option>
+                                <option value="RS">RS</option>
+                                <option value="PR">PR</option>
+                            </select>
+                        </div>
 
-                    <label class='label' for='cidade'>Cidade</label>
-                    <input type='text' value='<%= details.cidade %>' id='cidade' name='cidade'/>
-                </div>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='cidade'>Cidade</label>
+                            <input class='campo' type='text' value='<%= details.cidade %>' id='cidade' name='cidade'/>
+                        </div>
+                    </div>
 
-                <div class='linha'>
-                    <label class='label' for='endereco'>Endereço</label>
-                    <input type='text' value='<%= details.endereco %>' id='endereco' name='endereco'/>
-                </div>
+                    <div class='linha'>
+                        <div class='conjunto campoTamMax'>
+                            <label class='label' for='endereco'>Endereço</label>
+                            <input class='campo' type='text' value='<%= details.endereco %>' id='endereco' name='endereco'/>
+                        </div>
+                    </div>
 
-                <div class='linha'>
-                    <label class='label' for='cpfCliente'>CPF do Cliente</label>
-                    <input type='text' value='<%= details.cpfCliente %>' id='cpfCliente' name='cpfCliente'/>
+                    <div class='linha'>
+                        <div class='conjunto campoTamMin'>
+                            <label class='label' for='cpfCliente'>CPF do Cliente</label>
+                            <input class='campo' type='text' value='<%= details.cpfCliente %>' id='cpfCliente' name='cpfCliente'/>
+                        </div>
 
-                    <label class='label' for='nomeCliente'>Nome</label>
-                    <input type='text' value='<%= details.nomeCliente %>' id='nomeCliente' name='nomeCliente'/>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='nomeCliente'>Nome</label>
+                            <input class='campo' type='text' value='<%= details.nomeCliente %>' id='nomeCliente' name='nomeCliente'/>
+                        </div>
 
-                    <button href='#'>Consultar</button>
-                </div>
+                        <div class='conjunto'>
+                            <button class='botao botaoConsulta' href='#'>Consultar</button>
+                        </div>
+                    </div>
 
-                <div class='linha'>
-                    <label class='label' for='valorFesta'>Valor da Festa</label>
-                    <input type='text' value='<%= details.valorFesta %>' id='valorFesta' name='valorFesta'/>
+                    <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='valorFesta'>Valor da Festa</label>
+                            <input class='campo' type='text' value='<%= details.valorFesta %>' id='valorFesta' name='valorFesta'/>
+                        </div>
 
-                    <input type="hidden" value='<%= details.status %>' id='hiddenStatus' />
-                    <label class='label' for='status'>Status</label>
-                    <select id="status" name="status">
-                        <option value=""></option>
-                        <option value="A">Agendado</option>
-                        <option value="P">Pago</option>
-                        <option value="E">Entregue</option>
-                        <option value="F">Fechado</option>
-                    </select>
-                </div>
+                        <input type="hidden" value='<%= details.status %>' id='hiddenStatus' />
 
-                <div class='linha'>
-                    <label class='label' for='observacao'>Observação</label>
-                    <input type='text' value='<%= details.observacao %>' id='observacao' name='observacao'/>
-                </div>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='status'>Status</label>
+                            <select class='campo' id="status" name="status">
+                                <option value=""></option>
+                                <option value="A">Agendado</option>
+                                <option value="P">Pago</option>
+                                <option value="E">Entregue</option>
+                                <option value="F">Fechado</option>
+                            </select>
+                        </div>
+                    </div>
 
-                <div class='linha'>
-                    <input type='submit' value='Alterar' name='alterar'/>
+                    <div class='linha'>
+                        <div class='conjunto campoTamMax'>
+                            <label class='label' for='observacao'>Observação</label>
+                            <textarea class='texto' id='observacao' name='observacao'><%= details.observacao %></textarea>
+                        </div>
+                    </div>
 
-                    <button><a href="/festaAdicionarItens/<%= details._id %>">Inserir Itens</a></button>
-                    <button><a href="/festaExcluir/<%= details._id %>">Excluir</a></button>
-                    
-                </div>
-            
-            </form>
+                    <div class='linha'>
+                        <div class='conjunto'>
+                            <input class='botao botaoAlterar' type='submit' value='Alterar' name='alterar'/>
+                        </div>
+                        <div class='conjunto'>
+                            <button class='botao botaoConsulta'><a href="/festaAdicionarItens/<%= details._id %>">Lista de Itens</a></button>
+                        </div>
+                        <div class='conjunto'>
+                            <button class='botao botaoExcluir'><a href="/festaExcluir/<%= details._id %>">Excluir</a></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
         <% })} %>
         <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO ------------------------- -->

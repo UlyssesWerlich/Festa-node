@@ -140,7 +140,7 @@ const schemaFesta = new Schema({
 
 }, {collection: 'festas'})
 
-var festas = mongoose.model('UserData2', schemaFesta)
+var festas = mongoose.model('UserData2', schemaFesta);
 
 app.get('/festaCadastro', (req, res) =>{
     res.render('festaCadastro.ejs', {info: false})
@@ -264,7 +264,7 @@ app.post('/festaAdicionarItens/', (req,res) => {
 
 app.get('/ajaxFestaItens/:consultaItem', (req,res) =>{
     var busca = { "item": RegExp(req.params.consultaItem , 'i')}
-    itens.find(busca).limit(4)
+    itens.find(busca).limit(3)
     .then(function(result){
         res.render('../ajax/ajaxFestaItens.ejs', {data: result})
     }).catch((err) => {
@@ -273,7 +273,7 @@ app.get('/ajaxFestaItens/:consultaItem', (req,res) =>{
 })
 
 
-//================================= ROTAS RELACIONADAS A itens =================================
+//================================= ROTAS RELACIONADAS A ITENS =================================
 
 const schemaitem = new Schema({
     item: {type: String, required: true},
@@ -311,7 +311,7 @@ app.get('/itemConsulta', (req, res) =>{
 
 app.post('/itemConsulta', (req, res) =>{
     var busca = { "item": RegExp(req.body.itemConsulta , 'i')}
-    itens.find(busca)
+    itens.find(busca).limit(13)
     .then(function(result){
         res.render('itemConsulta.ejs', {data: result})
     }).catch((err) => {

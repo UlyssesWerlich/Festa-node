@@ -14,72 +14,75 @@
             <h1>Alterar itens de uma Festa</h1>
         </div>
 
-        <div class='linha'>
-            <label class='label' for='dataFesta'>Data da festa</label>
-            <input type='date' value='<%= details.dataFesta %>' id='dataFesta' name='dataFesta' readonly/>
+        <div class='conteudo'>
+            <div class='linha'>
+                <div class='conjunto campoTamMed'>
+                    <label class='label' for='dataFesta'>Data da festa</label>
+                    <input class='campo' type='date' value='<%= details.dataFesta %>' id='dataFesta' name='dataFesta' readonly/>
+                </div>
+                <div class='conjunto campoTamMin'>
+                    <label class='label' for='horaMontagem'>Entrega</label>
+                    <input class='campo' type='text' value='<%= details.horaMontagem %>' size='3' placeholder='horas' id='horaMontagem' name='horaMontagem' readonly/>
+                </div>
+                <div class='conjunto campoTamMin'>
+                    <label class='label' for='horaDesmontagem'>Retirada</label>
+                    <input class='campo' type='text' value='<%= details.horaDesmontagem %>' size='3' placeholder='horas' id='horaDesmontagem' name='horaDesmontagem' readonly/>
+                </div>
+            </div>
+            
+            <div class='subtitle'>
+                <h3>Consulta de itens</h3>
+            </div>
 
-            <label class='label' for='horaMontagem'>Entrega as</label>
-            <input type='text' value='<%= details.horaMontagem %>' size='3' placeholder='horas' id='horaMontagem' name='horaMontagem' readonly/>
-
-            <label class='label' for='horaDesmontagem'>Desmontagem as</label>
-            <input type='text' value='<%= details.horaDesmontagem %>' size='3' placeholder='horas' id='horaDesmontagem' name='horaDesmontagem' readonly/>
-        </div>
-        
-        <div class='subtitle'>
-            <h3>Consulta de itens</h3>
-        </div>
-
-        <table border=1>
-            <thead>
-                <tr>
-                    <th><input type='text' onkeyup='getDados()' id='consultaItem' placeholder="Mínimo 3 caracteres"/></th>
-                    <th>Item</th>
-                    <th>Tipo</th>
-                    <th>Tema</th>
-                    <th>Preço</th>
-                </tr>
-            </thead>
-            <tbody id='resultado'>
-                
-            </tbody>
-        </table>
-
-
-        <br/><br/>
-
-        <div class='subtitle'>
-            <h3>Lista de itens</h3>
-        </div>
-        <form method='POST' action='/festaAdicionarItens/'>
-            <input type='hidden' name='id' value='<%= details._id %>' />
-            <table id='listaDeItens' border='1'> 
+            <table class='tabela'>
                 <thead>
-                    <tr>
-                        <th><input type='submit' value='Atualizar Lista' name='botao'/></th>
+                    <tr class='linhaCabecalho'>
+                        <th><input class='campo' type='text' onkeyup='getDados()' id='consultaItem' placeholder="Mínimo 3 caracteres"/></th>
                         <th>Item</th>
                         <th>Tipo</th>
                         <th>Tema</th>
                         <th>Preço</th>
                     </tr>
                 </thead>
-                <tbody id='lista'>
+                <tbody id='resultado'>
+                    
+                </tbody>
+            </table>
+
+            <div class='subtitle'>
+                <h3>Lista de itens</h3>
+            </div>
+            <form method='POST' action='/festaAdicionarItens/'>
+                <input type='hidden' name='id' value='<%= details._id %>' />
+                <table class='tabela' id='listaDeItens'> 
+                    <thead>
+                        <tr class='linhaCabecalho'>
+                            <th><input class='botao botaoAlterar' type='submit' value='Atualizar Lista' name='botao'/></th>
+                            <th>Item</th>
+                            <th>Tipo</th>
+                            <th>Tema</th>
+                            <th>Preço</th>
+                        </tr>
+                    </thead>
+                    <tbody id='lista'>
 <%
 if(details.itens){
     details.itens.forEach(function(item) { %>
 
-        <tr>
-            <td><button onclick='removerLinha(this)'>Remover</button></th>
-            <td><input type='hidden' name='ids[]' value='<%= item._id %>'/><input type='hidden' name='itens[]' value='<%= item.item %>'/><%= item.item %></td>
-            <td><input type='hidden' name='tipo[]' value='<%= item.tipo %>'/><%= item.tipo %></td>
-            <td><input type='hidden' name='tema[]' value='<%= item.tema %>'/><%= item.tema %></td>
-            <td><input type='hidden' name='preco[]' value='<%= item.preco %>'/><%= item.preco %></td>
-        </tr>
+    <tr class='linha1'>
+        <td><button class='botao botaoExcluir' onclick='removerLinha(this)'>Remover</button></th>
+        <td><input type='hidden' name='ids[]' value='<%= item._id %>'/><input type='hidden' name='itens[]' value='<%= item.item %>'/><%= item.item %></td>
+        <td><input type='hidden' name='tipo[]' value='<%= item.tipo %>'/><%= item.tipo %></td>
+        <td><input type='hidden' name='tema[]' value='<%= item.tema %>'/><%= item.tema %></td>
+        <td><input type='hidden' name='preco[]' value='<%= item.preco %>'/><%= item.preco %></td>
+    </tr>
         
 <% })} %>
 
-                </tbody>
-            </table>
-        </form>
+                    </tbody>
+                </table>
+            </form>
+        </div>
         <% })} %>
         <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO ------------------------- -->
     </body>
@@ -90,7 +93,7 @@ if(details.itens){
             function adicionarLinha(id, item, tipo, tema, preco) {
                 var tabela = document.getElementById('lista');
                 var linha = document.createElement('tr');
-                linha.insertCell(0).innerHTML = "<button onclick='removerLinha(this)'>Remover</button>"; 
+                linha.insertCell(0).innerHTML = "<button class='botao botaoExcluir' onclick='removerLinha(this)'>Remover</button>"; 
                 linha.insertCell(1).innerHTML = "<input type='hidden' name='ids[]' value='" + id + "'/>" + 
                                                 "<input type='hidden' name='itens[]' value='" + item + "'/>" + item; 
                 linha.insertCell(2).innerHTML = "<input type='hidden' name='tipo[]' value='" + tipo + "'/>" + tipo; 

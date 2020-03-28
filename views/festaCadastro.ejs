@@ -11,75 +11,101 @@
         <div class='title'>
             <h1>Cadastro de Festa</h1>
         </div>
-        <div class='forms'>
-            <form method='POST' action='/festaCadastro'> 
+        <div class='conteudo'>
+            <div class='forms'>
+                <form method='POST' action='/festaCadastro'> 
 
-                <div class='linha'>
-                    <label class='label' for='dataFesta'>Data da festa</label>
-                    <input type='date' id='dataFesta' name='dataFesta'/>
+                    <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='dataFesta'>Data da festa</label>
+                            <input class='campo' type='date' id='dataFesta' name='dataFesta'/>
+                        </div>
+                        <div class='conjunto campoTamMin'>
+                            <label class='label' for='horaMontagem'>Entrega</label>
+                            <input class='campo' type='text' placeholder='Horas' id='horaMontagem' name='horaMontagem'/>
+                        </div>
+                        <div class='conjunto campoTamMin'>
+                            <label class='label' for='horaDesmontagem'>Retirada</label>
+                            <input class='campo' type='text' placeholder='Horas' id='horaDesmontagem' name='horaDesmontagem'/>
+                        </div>
+                    </div>
 
-                    <label class='label' for='horaMontagem'>Entrega as</label>
-                    <input type='text' size='3' placeholder='horas' id='horaMontagem' name='horaMontagem'/>
+                    <div class='linha'>
+                        <div class='conjunto campoTamMin'>
+                            <label class='label' for='cep'>CEP</label>
+                            <input class='campo'  type='text' id='cep' name='cep'/>  
+                        </div>              
+                        
+                        <div class='conjunto campoTamMin'>
+                            <label class='label' for='uf'>UF</label>
+                            <select class='campo' id="uf" name="uf">
+                                <option value=""></option>
+                                <option value="SC">SC</option>
+                                <option value="RS">RS</option>
+                                <option value="PR">PR</option>
+                            </select>
+                        </div>
 
-                    <label class='label' for='horaDesmontagem'>Desmontagem as</label>
-                    <input type='text' size='3' placeholder='horas' id='horaDesmontagem' name='horaDesmontagem'/>
-                </div>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='cidade'>Cidade</label>
+                            <input class='campo' type='text' id='cidade' name='cidade'/>
+                        </div>
+                    </div>
 
-                <div class='linha'>
-                    <label class='label' for='cep'>CEP</label>
-                    <input type='text' id='cep' name='cep'/>                
-                    
-                    <label class='label' for='uf'>UF</label>
-                    <select id="uf" name="uf">
-                        <option value=""></option>
-                        <option value="SC">SC</option>
-                        <option value="RS">RS</option>
-                        <option value="PR">PR</option>
-                    </select>
+                    <div class='linha'>
+                        <div class='conjunto campoTamMax'>
+                            <label class='label' for='endereco'>Endereço</label>
+                            <input class='campo' type='text' id='endereco' name='endereco'/>
+                        </div>
+                    </div>
 
-                    <label class='label' for='cidade'>Cidade</label>
-                    <input type='text' id='cidade' name='cidade'/>
-                </div>
+                    <div class='linha'>
+                        <div class='conjunto campoTamMin'>
+                            <label class='label' for='cpfCliente'>CPF do Cliente</label>
+                            <input class='campo' type='text' id='cpfCliente' name='cpfCliente'/>
+                        </div>
 
-                <div class='linha'>
-                    <label class='label' for='endereco'>Endereço</label>
-                    <input type='text' id='endereco' name='endereco'/>
-                </div>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='nomeCliente'>Nome</label>
+                            <input class='campo' type='text' id='nomeCliente' name='nomeCliente'/>
+                        </div>
 
-                <div class='linha'>
-                    <label class='label' for='cpfCliente'>CPF do Cliente</label>
-                    <input type='text' id='cpfCliente' name='cpfCliente'/>
+                        <button class='botao botaoConsulta' href='#'>Consultar</button>
+                    </div>
 
-                    <label class='label' for='nomeCliente'>Nome</label>
-                    <input type='text' id='nomeCliente' name='nomeCliente'/>
+                    <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='valorFesta'>Valor da Festa</label>
+                            <input class='campo' type='text' id='valorFesta' name='valorFesta'/>
+                        </div>
 
-                    <button href='#'>Consultar</button>
-                </div>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='status'>Status</label>
+                            <select class='campo' id="status" name="status">
+                                <option value=""></option>
+                                <option value="A">Agendado</option>
+                                <option value="P">Pago</option>
+                                <option value="E">Entregue</option>
+                                <option value="F">Fechado</option>
+                            </select>
+                        </div>
+                    </div>
 
-                <div class='linha'>
-                    <label class='label' for='valorFesta'>Valor da Festa</label>
-                    <input type='text' id='valorFesta' name='valorFesta'/>
+                    <div class='linha'>
+                        <div class='conjunto campoTamMax'>
+                            <label class='label' for='observacao'>Observação</label>
+                            <textarea class='texto' id='observacao' name='observacao'></textarea>
+                        </div>
+                    </div>
 
-                    <label class='label' for='status'>Status</label>
-                    <select id="status" name="status">
-                        <option value=""></option>
-                        <option value="A">Agendado</option>
-                        <option value="P">Pago</option>
-                        <option value="E">Entregue</option>
-                        <option value="F">Fechado</option>
-                    </select>
-                </div>
-
-                <div class='linha'>
-                    <label class='label' for='observacao'>Observação</label>
-                    <input type='text' id='observacao' name='observacao'/>
-                </div>
-
-                <div class='linha'>
-                    <input type='submit' id='submit' value='Cadastrar' name='cadastro'/>
-                </div>
-            
-            </form>
+                    <div class='linha'>
+                        <div class='conjunto'>
+                            <input type='submit' class='botao botaoAlterar' id='submit' value='Cadastrar' name='cadastro'/>
+                        </div>
+                    </div>
+                
+                </form>
+            </div>
         </div>
         <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO ------------------------- -->
 

@@ -10,43 +10,45 @@
         <div class='title'>
             <h1>Consulta de item</h1>
         </div>
-        <div class='forms'>
-            <form method="POST" action='/itemConsulta'>
-                <div class='linha'>
+        <div class='conteudo'>
+            <div class='forms'>
+                <form method="POST" action='/itemConsulta'>
+                    <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='itemConsulta'>Nome do Item</label>
+                            <input class='campo' type='text' id='itemConsulta' name='itemConsulta'/>
+                        </div>
+                        
+                        <input type='submit' class='botao botaoConsulta' id='submit' value='Consultar' name='consulta'/>
 
-                    <label class='label' for='itemConsulta'>Nome do Item</label>
-                    <input type='text' id='itemConsulta' name='itemConsulta'/>
-
-                    <input type='submit' id='submit' value='Consultar' name='consulta'/>
-
-                </div>
-            </form>
+                    </div>
+                </form>
+            </div>
+            <div class='table'>
+                <table class='tabela'>
+                    <thead>
+                        <tr class='linhaCabecalho'>
+                            <td>Item</td>
+                            <td>Tipo</td>
+                            <td>Tema</td>
+                            <td>Preço</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% 
+                        if(data){
+                        data.forEach(function(details) { %>
+                        <tr class='linha1'>
+                            <td><a href='/itemAlterar/<%= details._id %>'><%= details.item %></a></td>
+                            <td><%= details.tipo %></td>
+                            <td><%= details.tema %></td>
+                            <td><%= details.preco %></td>
+                        </tr>    
+                    <% })} %>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class='table'>
-            <table border='1'>
-                <thead>
-                    <tr>
-                        <td>Item</td>
-                        <td>Tipo</td>
-                        <td>Tema</td>
-                        <td>Preço</td>
-                    </tr>
-                </thead>
-                <tbody>
-                <% 
-                    if(data){
-                    data.forEach(function(details) { %>
-                    <tr>
-                        <td><a href='/itemAlterar/<%= details._id %>'><%= details.item %></a></td>
-                        <td><%= details.tipo %></td>
-                        <td><%= details.tema %></td>
-                        <td><%= details.preco %></td>
-                    </tr>    
-                <% })} %>
-                </tbody>
-            </table>
-        </div>
-
         <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO -------------------------- -->
     </body>
     <footer>

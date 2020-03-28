@@ -13,43 +13,54 @@
 
         <%
             if(data){
-                data.forEach(function(details){ 
-                    
+                data.forEach(function(details){   
         %>
+        <div class='conteudo'>
+            <div class="forms">
+                <form name="form2" method="POST" action="/itemAlterar/<%= details._id %>">
+                    <div class='linha'>
+                        <div class="conjunto campoTamMax">
+                            <label class='label' for='item'>Item</label>
+                            <input class='campo' type='text' value='<%= details.item %>' id='item' name='item'/>
+                        </div>
+                    </div>
 
-        <div class="forms">
-            <form name="form2" method="POST" action="/itemAlterar/<%= details._id %>">
-                <div class='linha'>
-                    <label class='label' for='item'>Item</label>
-                    <input type='text' value='<%= details.item %>' id='item' name='item'/>
-                </div>
+                    <div class='linha'>
+                        <div class="conjunto campoTamMed">
+                            <label class='label' for='tipo'>Tipo de item</label>
+                            <input class='campo' type='text' value='<%= details.tipo %>' id='tipo' name='tipo'/>
+                        </div>
 
-                <div class='linha'>
-                    <label class='label' for='tipo'>Tipo de item</label>
-                    <input type='text' value='<%= details.tipo %>' id='tipo' name='tipo'/>
-                </div>
+                        <div class="conjunto campoTamMed">
+                            <label class='label' for='tema'>Temática do item</label>
+                            <input class='campo' type='text' value='<%= details.tema %>' id='tema' name='tema'/>
+                        </div>
+                    </div>
 
-                <div class='linha'>
-                    <label class='label' for='tema'>Temática do item</label>
-                    <input type='text' value='<%= details.tema %>' id='tema' name='tema'/>
-                </div>
+                    <div class='linha'>
+                        <div class="conjunto campoTamMin">
+                            <label class='label' for='preco'>Preço</label>
+                            <input class='campo' type='text' value='<%= details.preco %>' id='preco' name='preco'/>
+                        </div>
+                    </div>
 
-                <div class='linha'>
-                    <label class='label' for='preco'>Preço</label>
-                    <input type='text' value='<%= details.preco %>' id='preco' name='preco'/>
-                </div>
+                    <div class='linha'>
+                        <div class="conjunto campoTamMax">
+                            <label class='label' for='descricao'>Descrição do item</label>
+                            <textarea class='texto' id='descricao' name='descricao'><%= details.descricao %></textarea>
+                        </div>
+                    </div>
 
-                <div class='linha'>
-                    <label class='label' for='descricao'>Descrição do item</label>
-                    <input type='text' value='<%= details.descricao %>' id='descricao' name='descricao'/>
-                </div>
-
-                <div class='linha'>
-                    <input type="submit" name="alterar" value="Alterar">
-
-                    <button><a href="/itemExcluir/<%= details._id %>">Excluir</a></button>
-                </div>
-            </form>
+                    <div class='linha'>
+                        <div class="conjunto">
+                            <input type="submit" class='botao botaoAlterar' name="alterar" value="Alterar">
+                        </div>  
+                        <div class="conjunto">
+                            <button class='botao botaoExcluir'><a href="/itemExcluir/<%= details._id %>">Excluir</a></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
         <% })} %>
     </body>
