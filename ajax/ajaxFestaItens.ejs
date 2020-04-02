@@ -3,15 +3,15 @@ if(data){
     data.forEach(function(details) { 
         %>
         <tr class='linha1'>
-            <td><button class='botao botaoConsulta' 
-                        onclick="adicionarLinha('<%= details._id %>', 
-                                                '<%= details.item %>', 
-                                                '<%= details.tipo %>',
-                                                '<%= details.tema %>', 
-                                                '<%= details.preco %>')">Adicionar</button></td>
             <td><%= details.item %></td>
             <td><%= details.tipo %></td>
             <td><%= details.tema %></td>
             <td><%= details.preco %></td>
+            <td><button class='botaoTabela botaoConsulta' 
+                onclick="adicionarLinha('<%= details._id %>', 
+                                        '<%= details.item %>', 
+                                        '<%= details.tipo %>',
+                                        '<%= details.tema %>', 
+                                        '<%= details.preco %>')">Adicionar</button></td>
         </tr>
 <%  })} %>

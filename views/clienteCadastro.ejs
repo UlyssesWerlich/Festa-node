@@ -98,5 +98,8 @@
     </body>
     <footer>
         <%- include('../partials/footer.ejs') %>
+        <%  if (mensagem){  %>
+            <script>alert('<%= conteudo %>')</script>
+        <% } %>
     </footer>
 </html>

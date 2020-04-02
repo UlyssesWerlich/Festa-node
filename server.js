@@ -4,7 +4,22 @@ const router = express.Router()
 const app = express()
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-mongoose.connect('mongodb://localhost:27017/sistema_aluguel_festa');  
+mongoose.connect('mongodb://localhost:27017/sistema_aluguel_festa', {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+}); 
+
+mongoose.plugin(schema => {
+    schema.pre('findOneAndUpdate', setRunValidators);
+    schema.pre('updateMany', setRunValidators);
+    schema.pre('updateOne', setRunValidators);
+    schema.pre('update', setRunValidators);
+  });
+function setRunValidators() {
+    this.setOptions({ runValidators: true });
+}
 
 app.listen( 3000, () =>{
     console.log('Servidor rodando na porta 3000')
@@ -22,7 +37,7 @@ app.get('/', (req, res) =>{
 
 const schemaCliente = new Schema({
     nome: {type: String, required: true},
-    cpf: String,
+    cpf: {type: String, required: true},
     dataNascimento: String,
     telefone: String,
     celular: String,
@@ -36,7 +51,7 @@ const schemaCliente = new Schema({
 var clientes = mongoose.model('UserData', schemaCliente)
 
 app.get('/clienteCadastro', (req, res) =>{
-    res.render('clienteCadastro.ejs')
+    res.render('clienteCadastro.ejs', {mensagem: false})
 })
 
 app.post('/clienteCadastro', (req, res) =>{
@@ -52,25 +67,30 @@ app.post('/clienteCadastro', (req, res) =>{
         cidade: req.body.cidade,
         endereco: req.body.endereco
       };  
-
       var data = new clientes(cliente);  
-      data.save().catch((err) => {
-        return console.log(err)
+      data.save().then(function(result){
+        res.render('clienteCadastro.ejs', {mensagem: true,
+            conteudo: "Cliente cadastrado com sucesso"});
+    }).catch((err) => {
+        console.log(err);
+        res.render('clienteCadastro.ejs', {mensagem: true,
+            conteudo: "Não foi possível cadastrar esse cliente. Favor verificar os campos preenchidos e tentar novamente"});
     }); 
-    res.render('clienteCadastro.ejs')
 })
 
 app.get('/clienteConsulta', (req, res) =>{
-    res.render('clienteConsulta.ejs', {data: false})
+    res.render('clienteConsulta.ejs', {data: false, mensagem: false})
 })
 
 app.post('/clienteConsulta', (req, res) =>{  
     var busca = { "nome": RegExp(req.body.nomeConsulta , 'i')}
     clientes.find(busca)
     .then(function(result){
-        res.render('clienteConsulta.ejs', {data: result})
+        res.render('clienteConsulta.ejs', {data: result, mensagem: false})
     }).catch((err) => {
-        return console.log(err)
+        console.log(err);
+        res.render('clienteConsulta.ejs', {mensagem: true,
+            conteudo: "Não foi possível realizar a consulta. Favor verificar os campos preenchidos e tentar novamente"});
     }); 
 })
 
@@ -98,23 +118,47 @@ app.post('/clienteAlterar/:id', (req, res) =>{
             uf: req.body.uf,
             cidade: req.body.cidade,
             endereco: req.body.endereco,
-            __v: 0
-    }}, (err, result) =>{
-        if (err) return res.send(err)
-        res.render('clienteConsulta.ejs', {data: false})
-    }); 
+        }})
+        .then(function(result){
+            res.render('clienteConsulta.ejs', {data: false, mensagem: true,
+                conteudo: "Sucesso na alteração de dados de cliente"});
+        }).catch((err) => {
+            console.log(err);
+            res.render('clienteConsulta.ejs', {data: false, mensagem: true,
+                conteudo: "Não foi possível alterar dados. Favor verificar os campos preenchidos e tentar novamente"});
+        });
 })
 
 app.get('/clienteExcluir/:id', (req, res) =>{
     var id = { "_id": req.params.id}
     clientes.deleteOne(id)
     .then(function(result){
-        res.render('clienteConsulta.ejs', {data: false})
+        res.render('clienteConsulta.ejs', {data: false, mensagem: true, 
+            conteudo: "Item excluído com sucesso"})
     }).catch((err) => {
-        return console.log(err)
+        console.log(err)
+        res.render('itemConsulta.ejs', {data: false, mensagem: true, 
+            conteudo: "Falha ao excluir item, favor tentar novamente"});
     })
 })
- 
+
+app.get('/clienteValidar', (req, res) =>{
+    var busca = { 
+        $or : [
+            {"cpf": req.query.consulta},
+            {"nome": RegExp(req.query.consulta , 'i')}
+        ]
+    }
+    clientes.findOne(busca).select('cpf nome').limit(1)
+    .then(function(result){    
+        if (result)
+            res.send(`${result.cpf}<td>${result.nome}`) ;
+        else
+            res.send(` <td>Não encontrado`) ;
+    }).catch((err) => {
+        return console.log(err)
+    }); 
+})
 
 //================================= ROTAS RELACIONADAS A FESTA =================================
 
@@ -143,7 +187,7 @@ const schemaFesta = new Schema({
 var festas = mongoose.model('UserData2', schemaFesta);
 
 app.get('/festaCadastro', (req, res) =>{
-    res.render('festaCadastro.ejs', {info: false})
+    res.render('festaCadastro.ejs', {mensagem: false})
 })
 
 app.post('/festaCadastro', (req, res) =>{
@@ -163,24 +207,29 @@ app.post('/festaCadastro', (req, res) =>{
       };  
 
       var data = new festas(festa);  
-      data.save().catch((err) => {
-        return console.log(err)
+      data.save().then(function(result){
+        res.render('festaCadastro.ejs', {mensagem: true,
+            conteudo: "Festa cadastrado com sucesso"});
+    }).catch((err) => {
+        console.log(err);
+        res.render('festaCadastro.ejs', {mensagem: true,
+            conteudo: "Não foi possível cadastrar esta festa. Favor verificar os campos preenchidos e tentar novamente"});
     }); 
-    res.render('festaCadastro.ejs', {info: 1})
 })
 
 app.get('/festaConsulta', (req, res) =>{
-    res.render('festaConsulta.ejs', {data: false})
+    res.render('festaConsulta.ejs', {data: false, mensagem: false})
 })
 
 app.post('/festaConsulta', (req, res) =>{
     var busca = { "status": RegExp(req.body.statusConsulta , 'i')}
     festas.find(busca)
     .then(function(result){
-        res.render('festaConsulta.ejs', {data: result})
+        res.render('festaConsulta.ejs', {data: result, mensagem: false});
     }).catch((err) => {
-        return console.log(err)
-        //res.redirect('/clienteConsulta'); 
+        console.log(err);
+        res.render('festaConsulta.ejs', {mensagem: true,
+            conteudo: "Não foi possível realizar a consulta. Favor verificar os campos preenchidos e tentar novamente"});
     }); 
 })
 
@@ -209,19 +258,27 @@ app.post('/festaAlterar/:id', (req, res) =>{
             valorFesta: req.body.valorFesta,
             status: req.body.status,
             observacao: req.body.observacao
-    }}, (err, result) =>{
-        if (err) return res.send(err)
-        res.render('festaConsulta.ejs', {data: false})
-    }); 
-})
+        }})
+        .then(function(result){
+            res.render('festaConsulta.ejs', {data: false, mensagem: true,
+                conteudo: "Sucesso na alteração de dados da festa"});
+        }).catch((err) => {
+            console.log(err);
+            res.render('festaConsulta.ejs', {data: false, mensagem: true,
+                conteudo: "Não foi possível alterar dados. Favor verificar os campos preenchidos e tentar novamente"});
+        });
+});
 
 app.get('/festaExcluir/:id', (req, res) =>{
     var id = { "_id": req.params.id}
     festas.deleteOne(id)
     .then(function(result){
-        res.render('festaConsulta.ejs', {data: false})
+        res.render('festaConsulta.ejs', {data: false, mensagem: true, 
+            conteudo: "Festa excluído com sucesso"})
     }).catch((err) => {
-        return console.log(err)
+        console.log(err)
+        res.render('festaConsulta.ejs', {data: false, mensagem: true, 
+            conteudo: "Falha ao excluir festa, favor tentar novamente"});
     })
 })
 
@@ -229,12 +286,11 @@ app.get('/festaAdicionarItens/:id', (req, res) => {
     var id = { "_id": req.params.id}
     festas.find(id)
     .then(function(result){
-        res.render('festaAdicionarItens.ejs', {data: result})
+        res.render('festaAdicionarItens.ejs', {data: result, mensagem: false})
     }).catch((err) => {
         return console.log(err)
     })
 })
-
 
 app.post('/festaAdicionarItens/', (req,res) => {
     ids = req.body.ids;
@@ -251,19 +307,24 @@ app.post('/festaAdicionarItens/', (req,res) => {
             tipo: tipo[i],
             tema: tema[i],
             preco: preco[i],
-        })
-    }
+    })}
 
     festas.updateOne({"_id": req.body.id}, {$set: {"itens": listaItens}})
     .then(function(result){
-        res.render('festaConsulta.ejs', {data: false})
+        res.render('festaConsulta.ejs', {data: false, mensagem: true, 
+            conteudo: "Lista de itens da festa atualizado com sucesso"})
     }).catch((err) => {
-        return console.log(err)
+        console.log(err);
+        res.render('festaConsulta.ejs', {data: false, mensagem: true, 
+            conteudo: "Falha ao atualizar lista de itens. Favor tentar novamente"});
     })
 })
 
-app.get('/ajaxFestaItens/:consultaItem', (req,res) =>{
-    var busca = { "item": RegExp(req.params.consultaItem , 'i')}
+app.get('/ajaxFestaItens', (req,res) =>{
+    var busca = {   "item": RegExp(req.query.item , 'i'),
+                    "tipo": RegExp(req.query.tipo, 'i'),
+                    "tema": RegExp(req.query.tema, 'i')
+                }
     itens.find(busca).limit(3)
     .then(function(result){
         res.render('../ajax/ajaxFestaItens.ejs', {data: result})
@@ -271,22 +332,20 @@ app.get('/ajaxFestaItens/:consultaItem', (req,res) =>{
         return console.log(err)
     }); 
 })
-
-
 //================================= ROTAS RELACIONADAS A ITENS =================================
 
-const schemaitem = new Schema({
+const schemaItem = new Schema({
     item: {type: String, required: true},
-    tipo: String,
+    tipo: {type: String, required: true},
     tema: String,
     preco: String,
     descricao: String
 }, {collection: 'itens'})
 
-var itens = mongoose.model( "userData2", schemaitem)
+const itens = mongoose.model( "userData2", schemaItem);
 
 app.get('/itemCadastro', (req, res) =>{
-    res.render('itemCadastro.ejs', {data: false})
+    res.render('itemCadastro.ejs', {mensagem: false})
 })
 
 app.post('/itemCadastro', (req, res) =>{
@@ -298,24 +357,30 @@ app.post('/itemCadastro', (req, res) =>{
         descricao: req.body.descricao
       };  
 
-      var data = new itens(item);  
-      data.save().catch((err) => {
-        return console.log(err)
+    var data = new itens(item);  
+    data.save().then(function(result){
+        res.render('itemCadastro.ejs', {mensagem: true,
+            conteudo: "Item cadastrado com sucesso"});
+    }).catch((err) => {
+        console.log(err);
+        res.render('itemCadastro.ejs', {mensagem: true,
+            conteudo: "Não foi possível cadastrar esse item. Favor verificar os campos preenchidos e tentar novamente"});
     }); 
-    res.render('itemCadastro.ejs')
 })
 
 app.get('/itemConsulta', (req, res) =>{
-    res.render('itemConsulta.ejs', {data: false})
+    res.render('itemConsulta.ejs', {data: false, mensagem: false})
 })
 
 app.post('/itemConsulta', (req, res) =>{
     var busca = { "item": RegExp(req.body.itemConsulta , 'i')}
     itens.find(busca).limit(13)
     .then(function(result){
-        res.render('itemConsulta.ejs', {data: result})
+        res.render('itemConsulta.ejs', {data: result, mensagem: false})
     }).catch((err) => {
-        return console.log(err)
+        console.log(err);
+        res.render('itemConsulta.ejs', {mensagem: true,
+            conteudo: "Não foi possível realizar a consulta. Favor verificar os campos preenchidos e tentar novamente"});
     }); 
 })
 
@@ -330,26 +395,34 @@ app.get('/itemAlterar/:id', (req, res) => {
 })
 
 app.post('/itemAlterar/:id', (req, res) =>{
-    itens.updateOne({ "_id": req.params.id}, { 
+    itens.updateOne({ "_id": req.params.id},  { 
         $set: {
             item: req.body.item,  
             tipo: req.body.tipo,
             tema: req.body.tema,
             preco: req.body.preco,
             descricao: req.body.descricao
-    }}, (err, result) =>{
-        if (err) return res.send(err)
-        res.render('itemConsulta.ejs', {data: false})
-    }); 
+    }})
+    .then(function(result){
+        res.render('itemConsulta.ejs', {data: false, mensagem: true,
+            conteudo: "Sucesso na alteração de dados do item"});
+    }).catch((err) => {
+        console.log(err);
+        res.render('itemConsulta.ejs', {data: false, mensagem: true,
+            conteudo: "Não foi possível alterar dados. Favor verificar os campos preenchidos e tentar novamente"});
+    });
 })
 
 app.get('/itemExcluir/:id', (req, res) =>{
     var id = { "_id": req.params.id}
     itens.deleteOne(id)
     .then(function(result){
-        res.render('itemConsulta.ejs', {data: false})
+        res.render('itemConsulta.ejs', {data: false, mensagem: true, 
+            conteudo: "Item excluído com sucesso"})
     }).catch((err) => {
-        return console.log(err)
+        console.log(err)
+        res.render('itemConsulta.ejs', {data: false, mensagem: true, 
+            conteudo: "Falha ao excluir item, favor tentar novamente"});
     })
 })
 

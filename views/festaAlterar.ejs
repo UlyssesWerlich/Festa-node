@@ -67,19 +67,21 @@
                     </div>
 
                     <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='nomeCliente'>Nome</label>
+                            <input class='campo' type='text' value='<%= details.nomeCliente %>' id='nomeCliente' name='nomeCliente'/>
+                        </div>
+
                         <div class='conjunto campoTamMin'>
                             <label class='label' for='cpfCliente'>CPF do Cliente</label>
                             <input class='campo' type='text' value='<%= details.cpfCliente %>' id='cpfCliente' name='cpfCliente'/>
                         </div>
 
                         <div class='conjunto campoTamMed'>
-                            <label class='label' for='nomeCliente'>Nome</label>
-                            <input class='campo' type='text' value='<%= details.nomeCliente %>' id='nomeCliente' name='nomeCliente'/>
+                            <label class='label' for='nomeCliente'>Consultar Cliente</label>
+                            <input class='campo' placeholder='Informe o nome ou o CPF aqui' type='text' id='consulta'/>
                         </div>
-
-                        <div class='conjunto'>
-                            <button class='botao botaoConsulta' href='#'>Consultar</button>
-                        </div>
+                        <span><a href='javascript:getDados()'>Validar</a></span>
                     </div>
 
                     <div class='linha'>
@@ -122,18 +124,71 @@
                     </div>
                 </form>
             </div>
+            <br/>
+            <div class="linha">
+                <table class='tabela' id='listaDeItens'> 
+                    <thead>
+                        <tr class='linhaCabecalho'>
+                            <td>Lista de itens</td>
+                            <td>Tipo</td>
+                            <td>Tema</td>
+                            <td>Preço</td>
+                        </tr>
+                    </thead>
+                    <tbody id='lista'>
+<%
+if(details.itens){
+details.itens.forEach(function(item) { %>
+
+<tr class='linha1'>
+    <td><%= item.item %></td>
+    <td><%= item.tipo %></td>
+    <td><%= item.tema %></td>
+    <td><%= item.preco %></td>
+</tr>
+
+<% })} %>
+
+                    </tbody>
+                </table>
+            </div>
         </div>
         <% })} %>
         <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO ------------------------- -->
     </body>
     <footer>
         <%- include('../partials/footer.ejs') %>
+
         <script>
             var uf = document.getElementById('hiddenUf').value;
             document.getElementById('uf').value = uf;
 
             var status = document.getElementById('hiddenStatus').value;
             document.getElementById('status').value = status;
+        </script>
+
+        <script src='/js/request.js'></script>
+        <script>
+            function getDados(){
+                var consulta =  document.getElementById("consulta");
+                if (consulta.value.length > 7) {
+                    var xmlreq = CriarRequest();
+                    xmlreq.open("GET", "/clienteValidar?consulta=" + consulta.value, true);
+                    xmlreq.onreadystatechange = function(){
+                        if (xmlreq.status == 200) {
+                            var resposta = xmlreq.responseText;
+                            var array = resposta.split('<td>');
+                            document.getElementById("cpfCliente").value = array[0];
+                            document.getElementById("nomeCliente").value = array[1];
+                            consulta.value = "";
+                        } else {
+                            document.getElementById("nomeCliente").value = "Não encontrado";
+                    }   }
+                    xmlreq.send(null);
+                } else {
+                    document.getElementById("cpfCliente").value = "";
+                    document.getElementById("nomeCliente").value = "Consulta de no mínimo 8 caracteres"; 
+            }   }
         </script>
     </footer>
 </html>

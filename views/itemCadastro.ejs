@@ -38,6 +38,10 @@
                             <label class='label' for='preco'>Preço</label>
                             <input class='campo' type='text' id='preco' name='preco'/>
                         </div>
+                        <div class="conjunto campoTamMin">
+                            <label class='label' for='valorAluguel'>Valor aluguel</label>
+                            <input class='campo' type='text' id='valorAluguel' name='valorAluguel'/>
+                        </div>
                     </div>
 
                     <div class='linha'>
@@ -58,5 +62,8 @@
     </body>
     <footer>
         <%- include('../partials/footer.ejs') %>
+        <%  if (mensagem){  %>
+            <script>alert('<%= conteudo %>')</script>
+        <% } %>
     </footer>
 </html>

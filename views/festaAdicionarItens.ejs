@@ -30,58 +30,74 @@
                 </div>
             </div>
             
-            <div class='subtitle'>
-                <h3>Consulta de itens</h3>
+            <div class='tabelaConsulta'>
+                <div class='linha'>
+                    <div class="conjunto">
+                        <label>Consulta de Item</label>
+                        <table class='tabela'>
+                            <thead>
+                                <tr class='linhaCabecalho'>
+                                    <td class='campoTamMed'>
+                                        <input class='campo' type='text' onkeyup='getDados()' id='consultaItem' placeholder="Nome"/>
+                                    </td>
+                                    <td>
+                                        <input class='campo' type='text' onkeyup='getDados()' id='consultaTipo' placeholder="Tipo"/>
+                                    </td>
+                                    <td>
+                                        <input class='campo' type='text' onkeyup='getDados()' id='consultaTema' placeholder="Tema"/>
+                                    </td>
+                                    <td class='campoTamMin'>
+                                        Preço
+                                    </td>
+                                    <td class='campoTamMin'>
+                                        Ação
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody id='resultado'>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
-            <table class='tabela'>
-                <thead>
-                    <tr class='linhaCabecalho'>
-                        <th><input class='campo' type='text' onkeyup='getDados()' id='consultaItem' placeholder="Mínimo 3 caracteres"/></th>
-                        <th>Item</th>
-                        <th>Tipo</th>
-                        <th>Tema</th>
-                        <th>Preço</th>
-                    </tr>
-                </thead>
-                <tbody id='resultado'>
-                    
-                </tbody>
-            </table>
 
-            <div class='subtitle'>
-                <h3>Lista de itens</h3>
-            </div>
-            <form method='POST' action='/festaAdicionarItens/'>
-                <input type='hidden' name='id' value='<%= details._id %>' />
-                <table class='tabela' id='listaDeItens'> 
-                    <thead>
-                        <tr class='linhaCabecalho'>
-                            <th><input class='botao botaoAlterar' type='submit' value='Atualizar Lista' name='botao'/></th>
-                            <th>Item</th>
-                            <th>Tipo</th>
-                            <th>Tema</th>
-                            <th>Preço</th>
-                        </tr>
-                    </thead>
-                    <tbody id='lista'>
+                    <div class='conjunto'>
+                        <label>Lista de itens</label>
+                    </div>
+                    <form method='POST' action='/festaAdicionarItens/'>
+                        <input type='hidden' name='id' value='<%= details._id %>' />
+
+                        <table class='tabela' id='listaDeItens'> 
+                            <thead>
+                                <tr class='linhaCabecalho'>
+                                    <td>Item</td>
+                                    <td>Tipo</td>
+                                    <td>Tema</td>
+                                    <td>Preço</td>
+                                    <td><input class='botaoTabela botaoAlterar' type='submit' value='Atualizar Lista' name='botao'/></td>
+                                </tr>
+                            </thead>
+                            <tbody id='lista'>
 <%
 if(details.itens){
     details.itens.forEach(function(item) { %>
 
     <tr class='linha1'>
-        <td><button class='botao botaoExcluir' onclick='removerLinha(this)'>Remover</button></th>
         <td><input type='hidden' name='ids[]' value='<%= item._id %>'/><input type='hidden' name='itens[]' value='<%= item.item %>'/><%= item.item %></td>
         <td><input type='hidden' name='tipo[]' value='<%= item.tipo %>'/><%= item.tipo %></td>
         <td><input type='hidden' name='tema[]' value='<%= item.tema %>'/><%= item.tema %></td>
         <td><input type='hidden' name='preco[]' value='<%= item.preco %>'/><%= item.preco %></td>
+        <td><button class='botaoTabela botaoExcluir' onclick='removerLinha(this)'>Remover</button></td>
     </tr>
         
 <% })} %>
 
-                    </tbody>
-                </table>
-            </form>
+                            </tbody>
+                        </table>
+                    </form>
+                
         </div>
         <% })} %>
         <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO ------------------------- -->
@@ -92,13 +108,14 @@ if(details.itens){
         <script>
             function adicionarLinha(id, item, tipo, tema, preco) {
                 var tabela = document.getElementById('lista');
-                var linha = document.createElement('tr');
-                linha.insertCell(0).innerHTML = "<button class='botao botaoExcluir' onclick='removerLinha(this)'>Remover</button>"; 
-                linha.insertCell(1).innerHTML = "<input type='hidden' name='ids[]' value='" + id + "'/>" + 
+                var linha = document.createElement("tr");
+                linha.setAttribute('class', 'linha1');
+                linha.insertCell(0).innerHTML = "<input type='hidden' name='ids[]' value='" + id + "'/>" + 
                                                 "<input type='hidden' name='itens[]' value='" + item + "'/>" + item; 
-                linha.insertCell(2).innerHTML = "<input type='hidden' name='tipo[]' value='" + tipo + "'/>" + tipo; 
-                linha.insertCell(3).innerHTML = "<input type='hidden' name='tema[]' value='" + tema + "'/>" + tema;
-                linha.insertCell(4).innerHTML = "<input type='hidden' name='preco[]' value='" + preco + "'/>" + preco;
+                linha.insertCell(1).innerHTML = "<input type='hidden' name='tipo[]' value='" + tipo + "'/>" + tipo; 
+                linha.insertCell(2).innerHTML = "<input type='hidden' name='tema[]' value='" + tema + "'/>" + tema;
+                linha.insertCell(3).innerHTML = "<input type='hidden' name='preco[]' value='" + preco + "'/>" + preco;
+                linha.insertCell(4).innerHTML = "<button class='botaoTabela botaoExcluir' onclick='removerLinha(this)'>Remover</button>"; 
                 document.getElementById('lista').appendChild(linha);
                 return false;
             }
@@ -110,19 +127,19 @@ if(details.itens){
             
             function getDados(){
                 var item =  document.getElementById("consultaItem").value;
+                var tipo =  document.getElementById("consultaTipo").value;
+                var tema =  document.getElementById("consultaTema").value;
                 
-                if (item.length > 2) {
+                if (item.length > 2 || tipo.length > 2 || tema.length > 2) {
                     var result = document.getElementById("resultado");
                     var xmlreq = CriarRequest();
-
-                    xmlreq.open("GET", "/ajaxFestaItens/" + item, true);
+                    xmlreq.open("GET", "/ajaxFestaItens?item=" + item + "&tipo=" + tipo + "&tema=" + tema , true);
                     xmlreq.onreadystatechange = function(){
 
                     if (xmlreq.status == 200)
                         result.innerHTML = xmlreq.responseText;
                     else 
                         result.innerHTML = "Erro: " + xmlreq.statusText;
-                        
                     };
                     xmlreq.send(null);
                 } else {
