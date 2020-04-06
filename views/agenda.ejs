@@ -8,8 +8,86 @@
         <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
 
 
+        <div class='title'>
+            <h1>Agenda</h1>
+        </div>
 
+        <div class='conteudo'>
+            <form method='POST' action='/agenda'>
+                <div class='linha'>
+                    <div class='conjunto campoTamMin'>
+                        <label class='label' for='mes'>Mês</label>
+                        <select class='campo' id='mes' name='mes'>
+                            <option value='01'>Janeiro</option>
+                            <option value='02'>Fevereiro</option>
+                            <option value='03'>Março</option>
+                            <option value='04'>Abril</option>
+                            <option value='05'>Maio</option>
+                            <option value='06'>Junho</option>
+                            <option value='07'>Julho</option>
+                            <option value='08'>Agosto</option>
+                            <option value='09'>Setembro</option>
+                            <option value='10'>Outubro</option>
+                            <option value='11'>Novembro</option>
+                            <option value='12'>Dezembro</option>
+                        </select>
+                    </div>                
+                    <div class='conjunto campoTamMin'>
+                        <label class='label' for='ano'>Ano</label>
+                        <input class='campo' type='number' value='2020' id='ano' name='ano'/>
+                    </div>
+                    <input type='submit' class='botao botaoConsulta' id='submit' value='Consultar' name='consulta'/>
+                </div>
+            </form>
 
+<% if(result){ 
+    var data = new Date(ano, mes, 0); %>
+
+    <div class='table'>
+        <table class='tabela'>
+            <thead>
+                <tr class='linhaCabecalho'>
+                    <td>Dia</td>
+                    <td>Cliente</td>
+                    <td>Cidade</td>
+                    <td>Endereço</td>
+                    <td>Valor</td>
+                </tr>
+            </thead>
+            <tbody>
+
+    <% for ( var i = 1; i <= data.getDate(); i++){ %>
+            
+        <tr class='linha1'>
+            <td><%= i %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        
+        <% result.forEach(function(details){
+            if(details.dataFesta.dia == i){ %>
+                <tr class='linha2'>
+                    <td></td>
+                    <td><%= details.nomeCliente %></td>
+                    <td><%= details.cidade %></td>
+                    <td><a href='/festaAlterar/<%= details._id %>'><%= details.endereco %></a></td>
+                    <td><%= details.valorFesta %></td>
+                </tr>
+        <% }   })
+     } %>
+                    </tbody>
+                </table>
+            </div> 
+        <script>
+            document.getElementById('mes').value = '<%= mes %>';
+            document.getElementById('ano').value = '<%= ano %>';
+        </script>
+
+<% } %>
+
+        </div>
         <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO ------------------------- -->
     </body>
     <footer>

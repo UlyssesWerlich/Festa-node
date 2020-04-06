@@ -1,8 +1,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const router = express.Router()
-const app = express()
+const app = express() 
 const mongoose = require('mongoose')
+
 const Schema = mongoose.Schema
 mongoose.connect('mongodb://localhost:27017/sistema_aluguel_festa', {
     useNewUrlParser: true,
@@ -45,7 +46,9 @@ const schemaCliente = new Schema({
     cep: String,
     uf: String,
     cidade: String,
-    endereco: String
+    endereco: String,
+    _visible: {type: Boolean,
+        default: true}
 }, {collection: 'clientes'})
 
 var clientes = mongoose.model('UserData', schemaCliente)
@@ -83,7 +86,8 @@ app.get('/clienteConsulta', (req, res) =>{
 })
 
 app.post('/clienteConsulta', (req, res) =>{  
-    var busca = { "nome": RegExp(req.body.nomeConsulta , 'i')}
+    var busca = { "nome": RegExp(req.body.nomeConsulta , 'i'),
+                  "_visible": true}
     clientes.find(busca)
     .then(function(result){
         res.render('clienteConsulta.ejs', {data: result, mensagem: false})
@@ -105,7 +109,6 @@ app.get('/clienteAlterar/:id', (req, res) =>{
 })
 
 app.post('/clienteAlterar/:id', (req, res) =>{ 
-    
     clientes.updateOne({ "_id": req.params.id}, { 
         $set: {
             nome: req.body.nome,  
@@ -118,6 +121,7 @@ app.post('/clienteAlterar/:id', (req, res) =>{
             uf: req.body.uf,
             cidade: req.body.cidade,
             endereco: req.body.endereco,
+            _visible: true,
         }})
         .then(function(result){
             res.render('clienteConsulta.ejs', {data: false, mensagem: true,
@@ -130,8 +134,10 @@ app.post('/clienteAlterar/:id', (req, res) =>{
 })
 
 app.get('/clienteExcluir/:id', (req, res) =>{
-    var id = { "_id": req.params.id}
-    clientes.deleteOne(id)
+    clientes.updateOne({ "_id": req.params.id},{
+        $set: {
+            _visible: false,
+    }   })
     .then(function(result){
         res.render('clienteConsulta.ejs', {data: false, mensagem: true, 
             conteudo: "Item excluído com sucesso"})
@@ -147,8 +153,7 @@ app.get('/clienteValidar', (req, res) =>{
         $or : [
             {"cpf": req.query.consulta},
             {"nome": RegExp(req.query.consulta , 'i')}
-        ]
-    }
+    ]    }
     clientes.findOne(busca).select('cpf nome').limit(1)
     .then(function(result){    
         if (result)
@@ -163,25 +168,48 @@ app.get('/clienteValidar', (req, res) =>{
 //================================= ROTAS RELACIONADAS A FESTA =================================
 
 const schemaFesta = new Schema({
-    dataFesta: {type: String, required: true},
-    horaMontagem: String,
-    horaDesmontagem: String,
+    dataFesta: {dia: {
+                    type: String,
+                    length: 2,
+                    required: true,},
+                mes: {
+                    type: String, 
+                    length: 2,
+                    required: true,},
+                ano: {
+                    type: Number, 
+                    length: 4,
+                    required: true,
+                    min: 2019,
+                    max: 2080,
+                }},
+    horaMontagem: {
+                    type: Number,
+                    min: 6,
+                    max: 22,
+    },
+    horaDesmontagem: {
+                    type: Number,
+                    min: 6,
+                    max: 22,
+            },
     cep: String,
     uf: String,
     cidade: String,
     endereco: String,
     cpfCliente: String,
     nomeCliente: String,
-    valorFesta: String,
+    valorFesta: Number,
     status: String,
     observacao: String,
+    _visible: {type: Boolean,
+                default: true},
     itens: [{ id: String,
              item: String,
              tipo: String,
              tema: String,
-             preco: String
+             preco: Number
     }]
-
 }, {collection: 'festas'})
 
 var festas = mongoose.model('UserData2', schemaFesta);
@@ -191,8 +219,13 @@ app.get('/festaCadastro', (req, res) =>{
 })
 
 app.post('/festaCadastro', (req, res) =>{
+    array = req.body.dataFesta.split('-');
     var festa = {  
-        dataFesta: req.body.dataFesta,  
+        dataFesta: {
+            dia: array[2],
+            mes: array[1],
+            ano: array[0],
+        },  
         horaMontagem: req.body.horaMontagem,
         horaDesmontagem: req.body.horaDesmontagem,
         cep: req.body.cep,
@@ -203,7 +236,7 @@ app.post('/festaCadastro', (req, res) =>{
         nomeCliente: req.body.nomeCliente,
         valorFesta: req.body.valorFesta,
         status: req.body.status,
-        observacao: req.body.observacao
+        observacao: req.body.observacao,
       };  
 
       var data = new festas(festa);  
@@ -222,7 +255,8 @@ app.get('/festaConsulta', (req, res) =>{
 })
 
 app.post('/festaConsulta', (req, res) =>{
-    var busca = { "status": RegExp(req.body.statusConsulta , 'i')}
+    var busca = { "status": RegExp(req.body.statusConsulta , 'i'),
+                "_visible": true}
     festas.find(busca)
     .then(function(result){
         res.render('festaConsulta.ejs', {data: result, mensagem: false});
@@ -244,9 +278,14 @@ app.get('/festaAlterar/:id', (req, res) => {
 })
 
 app.post('/festaAlterar/:id', (req, res) =>{
+    array = req.body.dataFesta.split('-');
     festas.updateOne({ "_id": req.params.id}, { 
         $set: {
-            dataFesta: req.body.dataFesta,  
+            dataFesta: {
+                dia: array[2],
+                mes: array[1],
+                ano: array[0],
+            },  
             horaMontagem: req.body.horaMontagem,
             horaDesmontagem: req.body.horaDesmontagem,
             cep: req.body.cep,
@@ -257,7 +296,8 @@ app.post('/festaAlterar/:id', (req, res) =>{
             nomeCliente: req.body.nomeCliente,
             valorFesta: req.body.valorFesta,
             status: req.body.status,
-            observacao: req.body.observacao
+            observacao: req.body.observacao,
+            _visible: true,
         }})
         .then(function(result){
             res.render('festaConsulta.ejs', {data: false, mensagem: true,
@@ -323,7 +363,8 @@ app.post('/festaAdicionarItens/', (req,res) => {
 app.get('/ajaxFestaItens', (req,res) =>{
     var busca = {   "item": RegExp(req.query.item , 'i'),
                     "tipo": RegExp(req.query.tipo, 'i'),
-                    "tema": RegExp(req.query.tema, 'i')
+                    "tema": RegExp(req.query.tema, 'i'),
+                    "_visible": true
                 }
     itens.find(busca).limit(3)
     .then(function(result){
@@ -339,7 +380,9 @@ const schemaItem = new Schema({
     tipo: {type: String, required: true},
     tema: String,
     preco: String,
-    descricao: String
+    descricao: String,
+    _visible: {type: Boolean,
+        default: true}
 }, {collection: 'itens'})
 
 const itens = mongoose.model( "userData2", schemaItem);
@@ -373,8 +416,9 @@ app.get('/itemConsulta', (req, res) =>{
 })
 
 app.post('/itemConsulta', (req, res) =>{
-    var busca = { "item": RegExp(req.body.itemConsulta , 'i')}
-    itens.find(busca).limit(13)
+    var busca = { "item": RegExp(req.body.itemConsulta , 'i'),
+                "_visible": true,}
+    itens.find(busca)
     .then(function(result){
         res.render('itemConsulta.ejs', {data: result, mensagem: false})
     }).catch((err) => {
@@ -401,9 +445,9 @@ app.post('/itemAlterar/:id', (req, res) =>{
             tipo: req.body.tipo,
             tema: req.body.tema,
             preco: req.body.preco,
-            descricao: req.body.descricao
-    }})
-    .then(function(result){
+            descricao: req.body.descricao,
+            _visible: true,
+    }}  ).then(function(result){
         res.render('itemConsulta.ejs', {data: false, mensagem: true,
             conteudo: "Sucesso na alteração de dados do item"});
     }).catch((err) => {
@@ -429,5 +473,20 @@ app.get('/itemExcluir/:id', (req, res) =>{
 // ================================= ROTAS RELACIONADAS A AGENDA =================================
 
 app.get('/agenda', (req, res) =>{
-    res.render('agenda.ejs')
+    res.render('agenda.ejs', {result: false});
+})
+
+app.post('/agenda', (req, res) =>{
+    var mes = req.body.mes;
+    var ano = req.body.ano;
+    festas.find({
+        "dataFesta.mes": mes,
+        "dataFesta.ano": ano 
+    }).then(function(result){
+            res.render('agenda.ejs', {result: result, mes: mes, ano: ano, mensagem: false})
+        }).catch((err) => {
+            console.log(err);
+            res.render('agenda.ejs', {result: false, mensagem: true,
+                conteudo: "Não foi possível realizar a consulta. Favor verificar os campos preenchidos e tentar novamente"});
+    }   ); 
 })

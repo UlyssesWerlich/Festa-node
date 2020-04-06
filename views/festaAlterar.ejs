@@ -14,6 +14,9 @@
         <% 
         if(data){
             data.forEach(function(details) { 
+                dataFesta = details.dataFesta.ano + "-" + 
+                details.dataFesta.mes + "-" + 
+                details.dataFesta.dia;
                 %>
         <div class='conteudo'>
             <div class='forms'>
@@ -22,12 +25,12 @@
                     <div class='linha'>
                         <div class='conjunto campoTamMed'>
                             <label class='label' for='dataFesta'>Data da festa</label>
-                            <input class='campo' type='date' value='<%= details.dataFesta %>' id='dataFesta' name='dataFesta'/>
+                            <input class='campo' type='date' value='<%= dataFesta %>' id='dataFesta' name='dataFesta'/>
                         </div>
 
                         <div class='conjunto campoTamMin'>
                             <label class='label' for='horaMontagem'>Entrega</label>
-                            <input class='campo' type='text' value='<%= details.horaMontagem %>' size='3' placeholder='horas' id='horaMontagem' name='horaMontagem'/>
+                            <input class='campo' autofocus type='text' value='<%= details.horaMontagem %>' size='3' placeholder='horas' id='horaMontagem' name='horaMontagem'/>
                         </div>
 
                         <div class='conjunto campoTamMin'>
@@ -68,13 +71,13 @@
 
                     <div class='linha'>
                         <div class='conjunto campoTamMed'>
-                            <label class='label' for='nomeCliente'>Nome</label>
-                            <input class='campo' type='text' value='<%= details.nomeCliente %>' id='nomeCliente' name='nomeCliente'/>
+                            <label class='label' for='nomeCliente'>Nome do Cliente</label>
+                            <input class='campo readonly' type='text' value='<%= details.nomeCliente %>' id='nomeCliente' name='nomeCliente'/>
                         </div>
 
                         <div class='conjunto campoTamMin'>
                             <label class='label' for='cpfCliente'>CPF do Cliente</label>
-                            <input class='campo' type='text' value='<%= details.cpfCliente %>' id='cpfCliente' name='cpfCliente'/>
+                            <input class='campo readonly' type='text' value='<%= details.cpfCliente %>' id='cpfCliente' name='cpfCliente'/>
                         </div>
 
                         <div class='conjunto campoTamMed'>

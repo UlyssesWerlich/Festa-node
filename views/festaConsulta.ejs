@@ -16,7 +16,7 @@
                     <div class='linha'>
                         <div class='conjunto campoTamMed'>
                             <label class='label' for='statusConsulta'>Status da festa</label>
-                            <select class='campo' id="statusConsulta" name="statusConsulta">
+                            <select class='campo' autofocus id="statusConsulta" name="statusConsulta">
                                 <option value=""></option>
                                 <option value="A">Agendado</option>
                                 <option value="P">Pago</option>
@@ -45,10 +45,14 @@
                     </thead>
                     <tbody>
                     <% 
-                        if(data){
-                        data.forEach(function(details) { %>
+                    if(data){
+                        data.forEach(function(details) { 
+                            dataFesta = details.dataFesta.dia + "/" + 
+                                        details.dataFesta.mes + "/" + 
+                                        details.dataFesta.ano;
+                            %>
                         <tr class='linha1'>
-                            <td><a href='/festaAlterar/<%= details._id %>'><%= details.dataFesta %></a></td>
+                            <td><a href='/festaAlterar/<%= details._id %>'><%= dataFesta %></a></td>
                             <td><a href='/festaAlterar/<%= details._id %>'><%= details.uf %></a></td>
                             <td><%= details.cidade %></td>
                             <td><%= details.endereco %></td>
