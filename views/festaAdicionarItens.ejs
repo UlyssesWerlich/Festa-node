@@ -8,7 +8,11 @@
 
         <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
         <% if (data){ 
-            data.forEach(function(details){ %>
+            data.forEach(function(details){ 
+                dataFesta = details.dataFesta.ano + "-" + 
+                            details.dataFesta.mes + "-" + 
+                            details.dataFesta.dia;
+        %>
 
         <div class='title'>
             <h1>Alterar itens de uma Festa</h1>
@@ -18,7 +22,7 @@
             <div class='linha'>
                 <div class='conjunto campoTamMed'>
                     <label class='label' for='dataFesta'>Data da festa</label>
-                    <input class='campo' type='date' value='<%= details.dataFesta %>' id='dataFesta' name='dataFesta' readonly/>
+                    <input class='campo' type='date' value='<%= dataFesta %>' id='dataFesta' name='dataFesta' readonly/>
                 </div>
                 <div class='conjunto campoTamMin'>
                     <label class='label' for='horaMontagem'>Entrega</label>
