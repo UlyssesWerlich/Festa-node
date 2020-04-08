@@ -24,7 +24,9 @@ module.exports = {
 
     async consultar(req, res){
         var busca = { "item": RegExp(req.body.itemConsulta , 'i'),
-                    "_visible": true,}
+                      "tipo": RegExp(req.body.tipoConsulta , 'i'),
+                      "tema": RegExp(req.body.temaConsulta , 'i'),
+                      "_visible": true,}
         itens.find(busca)
         .then(function(result){
             res.render('itemConsulta.ejs', {data: result, mensagem: false})

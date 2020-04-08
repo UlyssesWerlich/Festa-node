@@ -30,13 +30,31 @@
 
                         <div class='conjunto campoTamMin'>
                             <label class='label' for='horaMontagem'>Entrega</label>
-                            <input class='campo' autofocus type='text' value='<%= details.horaMontagem %>' size='3' placeholder='horas' id='horaMontagem' name='horaMontagem'/>
+                            <input class='campo' autofocus type='number' min="6" max='22' value='<%= details.horaMontagem %>' size='3' placeholder='horas' id='horaMontagem' name='horaMontagem'/>
                         </div>
 
                         <div class='conjunto campoTamMin'>
                             <label class='label' for='horaDesmontagem'>Retirada</label>
-                            <input class='campo' type='text' value='<%= details.horaDesmontagem %>' size='3' placeholder='horas' id='horaDesmontagem' name='horaDesmontagem'/>
+                            <input class='campo' type='number' min="6" max='22' value='<%= details.horaDesmontagem %>' size='3' placeholder='horas' id='horaDesmontagem' name='horaDesmontagem'/>
                         </div>
+                    </div>
+                    
+                    <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='nomeCliente'>Nome do Cliente</label>
+                            <input class='campo readonly' type='text' value='<%= details.nomeCliente %>' id='nomeCliente' name='nomeCliente'/>
+                        </div>
+
+                        <div class='conjunto campoTamMin'>
+                            <label class='label' for='cpfCliente'>CPF do Cliente</label>
+                            <input class='campo readonly' type='text' value='<%= details.cpfCliente %>' id='cpfCliente' name='cpfCliente'/>
+                        </div>
+
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='nomeCliente'>Consultar Cliente</label>
+                            <input class='campo' placeholder='Informe o nome ou o CPF aqui' type='text' id='consulta'/>
+                        </div>
+                        <span><a href='javascript:getDados()'>Validar</a></span>
                     </div>
 
                     <div class='linha'>
@@ -67,24 +85,6 @@
                             <label class='label' for='endereco'>Endereço</label>
                             <input class='campo' type='text' value='<%= details.endereco %>' id='endereco' name='endereco'/>
                         </div>
-                    </div>
-
-                    <div class='linha'>
-                        <div class='conjunto campoTamMed'>
-                            <label class='label' for='nomeCliente'>Nome do Cliente</label>
-                            <input class='campo readonly' type='text' value='<%= details.nomeCliente %>' id='nomeCliente' name='nomeCliente'/>
-                        </div>
-
-                        <div class='conjunto campoTamMin'>
-                            <label class='label' for='cpfCliente'>CPF do Cliente</label>
-                            <input class='campo readonly' type='text' value='<%= details.cpfCliente %>' id='cpfCliente' name='cpfCliente'/>
-                        </div>
-
-                        <div class='conjunto campoTamMed'>
-                            <label class='label' for='nomeCliente'>Consultar Cliente</label>
-                            <input class='campo' placeholder='Informe o nome ou o CPF aqui' type='text' id='consulta'/>
-                        </div>
-                        <span><a href='javascript:getDados()'>Validar</a></span>
                     </div>
 
                     <div class='linha'>
@@ -183,6 +183,10 @@ details.itens.forEach(function(item) { %>
                             var array = resposta.split('<td>');
                             document.getElementById("cpfCliente").value = array[0];
                             document.getElementById("nomeCliente").value = array[1];
+                            document.getElementById("cep").value = array[2];
+                            document.getElementById("uf").value = array[3];
+                            document.getElementById("cidade").value = array[4];
+                            document.getElementById("endereco").value = array[5];
                             consulta.value = "";
                         } else {
                             document.getElementById("nomeCliente").value = "Não encontrado";
@@ -191,6 +195,10 @@ details.itens.forEach(function(item) { %>
                 } else {
                     document.getElementById("cpfCliente").value = "";
                     document.getElementById("nomeCliente").value = "Consulta de no mínimo 8 caracteres"; 
+                    document.getElementById("cep").value = '';
+                    document.getElementById("uf").value = '';
+                    document.getElementById("cidade").value = '';
+                    document.getElementById("endereco").value = '';
             }   }
         </script>
     </footer>

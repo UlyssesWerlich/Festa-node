@@ -31,6 +31,23 @@
                     </div>
 
                     <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='nomeCliente'>Nome do Cliente</label>
+                            <input class='campo readonly' readonly placeholder='' type='text' id='nomeCliente' name='nomeCliente'/>
+                        </div>
+
+                        <div class='conjunto campoTamMin'>
+                            <label class='label' for='cpfCliente'>CPF do Cliente</label>
+                            <input class='campo readonly' type='text' readonly id='cpfCliente' name='cpfCliente'/>
+                        </div>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='nomeCliente'>Consultar Cliente</label>
+                            <input class='campo' placeholder='Informe o nome ou o CPF aqui' type='text' id='consulta'/>
+                        </div>
+                        <span><a href='javascript:getDados()'>Validar</a></span>
+                    </div>
+
+                    <div class='linha'>
                         <div class='conjunto campoTamMin'>
                             <label class='label' for='cep'>CEP</label>
                             <input class='campo'  type='text' id='cep' name='cep'/>  
@@ -57,24 +74,6 @@
                             <label class='label' for='endereco'>Endereço</label>
                             <input class='campo' type='text' id='endereco' name='endereco'/>
                         </div>
-                    </div>
-
-
-                    <div class='linha'>
-                        <div class='conjunto campoTamMed'>
-                            <label class='label' for='nomeCliente'>Nome do Cliente</label>
-                            <input class='campo readonly' readonly placeholder='' type='text' id='nomeCliente' name='nomeCliente'/>
-                        </div>
-
-                        <div class='conjunto campoTamMin'>
-                            <label class='label' for='cpfCliente'>CPF do Cliente</label>
-                            <input class='campo readonly' type='text' readonly id='cpfCliente' name='cpfCliente'/>
-                        </div>
-                        <div class='conjunto campoTamMed'>
-                            <label class='label' for='nomeCliente'>Consultar Cliente</label>
-                            <input class='campo' placeholder='Informe o nome ou o CPF aqui' type='text' id='consulta'/>
-                        </div>
-                        <span><a href='javascript:getDados()'>Validar</a></span>
                     </div>
 
                     <div class='linha'>
@@ -130,6 +129,10 @@
                             var array = resposta.split('<td>');
                             document.getElementById("cpfCliente").value = array[0];
                             document.getElementById("nomeCliente").value = array[1];
+                            document.getElementById("cep").value = array[2];
+                            document.getElementById("uf").value = array[3];
+                            document.getElementById("cidade").value = array[4];
+                            document.getElementById("endereco").value = array[5];
                             consulta.value = "";
                         } else {
                             document.getElementById("nomeCliente").value = "Não encontrado";
@@ -138,7 +141,12 @@
                 } else {
                     document.getElementById("cpfCliente").value = "";
                     document.getElementById("nomeCliente").value = "Consulta de no mínimo 8 caracteres"; 
+                    document.getElementById("cep").value = '';
+                    document.getElementById("uf").value = '';
+                    document.getElementById("cidade").value = '';
+                    document.getElementById("endereco").value = '';
             }   }
+            
         </script>
 
     <%  if (mensagem){  %>

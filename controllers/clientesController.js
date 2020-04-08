@@ -95,14 +95,15 @@ module.exports = {
                 {"cpf": req.query.consulta},
                 {"nome": RegExp(req.query.consulta , 'i')}
         ]    }
-        clientes.findOne(busca).select('cpf nome').limit(1)
+        clientes.findOne(busca).select('cpf nome cep uf cidade endereco').limit(1)
         .then(function(result){    
             if (result)
-                res.send(`${result.cpf}<td>${result.nome}`) ;
+                res.send(`${result.cpf}<td>${result.nome}<td>${result.cep}<td>` + 
+                         `${result.uf}<td>${result.cidade}<td>${result.endereco}`) ;
             else
-                res.send(` <td>Não encontrado`) ;
+                res.send(` <td>Não encontrado<td> <td> <td> <td> `) ;
         }).catch((err) => {
             return console.log(err)
         }); 
-    }
+    },
 }
