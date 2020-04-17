@@ -12,4 +12,8 @@
     <footer>
         <%- include('../partials/footer.ejs') %>
     </footer>
+
+    <%  if (mensagem){  %>
+        <script>alert('<%= mensagem %>')</script>
+    <% } %>
 </html>

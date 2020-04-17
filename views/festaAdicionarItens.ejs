@@ -66,24 +66,22 @@
                 </div>
             </div>
 
+            <div class='subtitle'>
+                <h2>Lista de Itens</h2>
+            </div>
+                <form method='POST' action='/festaAdicionarItens/<%= details._id %>'>
 
-                    <div class='conjunto'>
-                        <label>Lista de itens</label>
-                    </div>
-                    <form method='POST' action='/festaAdicionarItens/'>
-                        <input type='hidden' name='id' value='<%= details._id %>' />
-
-                        <table class='tabela' id='listaDeItens'> 
-                            <thead>
-                                <tr class='linhaCabecalho'>
-                                    <td>Item</td>
-                                    <td>Tipo</td>
-                                    <td>Tema</td>
-                                    <td>Preço</td>
-                                    <td><input class='botaoTabela botaoAlterar' type='submit' value='Atualizar Lista' name='botao'/></td>
-                                </tr>
-                            </thead>
-                            <tbody id='lista'>
+                    <table class='tabela' id='listaDeItens'> 
+                        <thead>
+                            <tr class='linhaCabecalho'>
+                                <td>Item</td>
+                                <td>Tipo</td>
+                                <td>Tema</td>
+                                <td>Preço</td>
+                                <td><input class='botaoTabela botaoAlterar' type='submit' value='Atualizar Lista' name='botao'/></td>
+                            </tr>
+                        </thead>
+                        <tbody id='lista'>
 <%
 if(details.itens){
     details.itens.forEach(function(item) { %>

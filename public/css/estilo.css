@@ -47,8 +47,8 @@ a:visited {
 
 .link {
     padding-left: 15%;
-    padding-bottom: 12px;
-    padding-top: 12px;
+    padding-bottom: 8px;
+    padding-top: 10px;
     padding-right: 0;
     background-color: #C4E0E5;
     transition: filter 0.4s;
@@ -79,6 +79,16 @@ a:visited {
     padding-bottom: 5px;
     width: 82%;
     float: right;
+    margin-bottom: 10px;
+    padding-left: 3%;
+    color: #116;
+}
+
+.subtitle{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 82%;
+    float: left;
     margin-bottom: 10px;
     padding-left: 3%;
     color: #116;
@@ -227,4 +237,9 @@ a:visited {
 
 .campoTamMin {
     width: 15%;
+}
+
+.checkbox {
+    margin: 8px 4px 0px 8px;
+    font-size: 17px;
 }

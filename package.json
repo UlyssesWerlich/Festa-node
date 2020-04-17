@@ -1,22 +1,29 @@
 {
-  "name": "node2",
-  "version": "1.0.0",
+  "name": "node-festa-infantil",
+  "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "ejs": "^3.0.1",
-    "express": "^4.17.1",
-    "mongodb": "^3.5.4",
-    "mongoose": "^5.9.4"
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv-safe": "^8.2.0",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "express-session": "^1.17.1",
+    "http-errors": "~1.6.3",
+    "mongoose": "^5.9.9",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.3",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.3"
   }
 }

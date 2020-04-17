@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../partials/header.ejs') %>
+    </head>
+    <body>
+        <%- include('../partials/menu.ejs') %>
+
+        <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
+        <div class='title'>
+            <h1>Alterar dados de Usuário</h1>
+        </div>
+
+        <div class='conteudo'>
+            <div class='forms'>
+                <form id='form' method='POST' action='/userSenha/<%= id %>'> 
+
+                    <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='nome'>Nome do usuário</label><br/>
+                            <input class='campo readonly' value='<%= nome %>' readonly type='text' id='nome' name='nome'/>
+                        </div>
+
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='login'>Login do usuário</label><br/>
+                            <input class='campo readonly' value='<%= login %>' readonly type='text' id='login' name='login'/>
+                        </div>
+                    </div>
+
+                    <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='cpf'>CPF</label><br/>
+                            <input class='campo readonly' value='<%= cpf %>' readonly type='text' id='cpf' name='cpf'/>
+                        </div>
+                    </div> <br/>
+
+                    <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='senha'>Senha atual</label><br/>
+                            <input class='campo' type='password' id='senha' name='senha'/>
+                        </div>
+                    </div>
+
+                    <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='novaSenha'>Nova senha</label><br/>
+                            <input class='campo' type='password' id='novaSenha' name='novaSenha'/>
+                        </div>
+
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='confirmarSenha'>Confirmar nova senha</label><br/>
+                            <input class='campo' type='password' onkeyup='verificarSenha()' id='confirmarSenha' name='confirmarSenha'/>
+                        </div>
+
+                        <label id='info'></label>
+                    </div>
+
+                    <div class='linha'>
+                        <div class='conjunto'>
+                            <input type='button' onClick='validarSenha()' class='botao botaoAlterar' value='Alterar' name='alterar'/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO ------------------------- -->
+    </body>
+
+    <script language="javascript">
+
+        function verificarSenha(){
+            novaSenha = document.getElementById('novaSenha').value;
+            confirmarSenha = document.getElementById('confirmarSenha').value;
+            if (novaSenha !== confirmarSenha) {
+                document.getElementById('info').innerHTML = "   Senhas incompatíveis";
+            }else{
+                document.getElementById('info').innerHTML = "";
+            }
+        }
+
+        function validarSenha(){
+            novaSenha = document.getElementById('novaSenha').value;
+            confirmarSenha = document.getElementById('confirmarSenha').value;
+
+            if (novaSenha !== confirmarSenha) {
+                alert("Senhas diferentes, favor repetir a operação"); 
+            }else{
+                document.getElementById('form').submit();
+            }
+        }
+    </script>
+
+    <footer>
+        <%- include('../partials/footer.ejs') %>
+    </footer>
+
+    <%  if (mensagem){  %>
+        <script>alert('<%= mensagem %>')</script>
+    <% } %>
+</html>

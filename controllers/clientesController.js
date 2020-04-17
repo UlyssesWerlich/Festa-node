@@ -17,12 +17,10 @@ module.exports = {
           };  
           var data = new clientes(cliente);  
           data.save().then(function(result){
-            res.render('clienteCadastro.ejs', {mensagem: true,
-                conteudo: "Cliente cadastrado com sucesso"});
+            res.render('clienteCadastro.ejs', {mensagem: "Cliente cadastrado com sucesso"});
         }).catch((err) => {
             console.log(err);
-            res.render('clienteCadastro.ejs', {mensagem: true,
-                conteudo: "Não foi possível cadastrar esse cliente. Favor verificar os campos preenchidos e tentar novamente"});
+            res.render('clienteCadastro.ejs', {mensagem: "Não foi possível cadastrar esse cliente. Favor verificar os campos preenchidos e tentar novamente"});
         }); 
     },
 
@@ -34,8 +32,7 @@ module.exports = {
                 res.render('clienteConsulta.ejs', {data: result, mensagem: false})
         }).catch((err) => {
             console.log(err);
-            res.render('clienteConsulta.ejs', {mensagem: true,
-            conteudo: "Não foi possível realizar a consulta. Favor verificar os campos preenchidos e tentar novamente"});
+            res.render('clienteConsulta.ejs', {mensagem: "Não foi possível realizar a consulta. Favor verificar os campos preenchidos e tentar novamente"});
         }); 
     },
 
@@ -65,12 +62,12 @@ module.exports = {
                 _visible: true,
             }})
             .then(function(result){
-                res.render('clienteConsulta.ejs', {data: false, mensagem: true,
-                    conteudo: "Sucesso na alteração de dados de cliente"});
+                res.render('clienteConsulta.ejs', {data: false, 
+                    mensagem: "Sucesso na alteração de dados de cliente"});
             }).catch((err) => {
                 console.log(err);
-                res.render('clienteConsulta.ejs', {data: false, mensagem: true,
-                    conteudo: "Não foi possível alterar dados. Favor verificar os campos preenchidos e tentar novamente"});
+                res.render('clienteConsulta.ejs', {data: false, 
+                    mensagem: "Não foi possível alterar dados. Favor verificar os campos preenchidos e tentar novamente"});
             });
     },
 
@@ -80,12 +77,10 @@ module.exports = {
                 _visible: false,
         }   })
         .then(function(result){
-            res.render('clienteConsulta.ejs', {data: false, mensagem: true, 
-                conteudo: "Item excluído com sucesso"})
+            res.render('clienteConsulta.ejs', {data: false, mensagem: "Cliente excluído com sucesso"})
         }).catch((err) => {
             console.log(err)
-            res.render('itemConsulta.ejs', {data: false, mensagem: true, 
-                conteudo: "Falha ao excluir item, favor tentar novamente"});
+            res.render('clienteConsulta.ejs', {data: false, mensagem: "Falha ao excluir cliente, favor tentar novamente"});
         })
     },
 

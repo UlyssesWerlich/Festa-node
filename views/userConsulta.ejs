@@ -7,11 +7,11 @@
         <%- include('../partials/menu.ejs') %>
         <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
         <div class='title'>
-            <h1>Consulta de Cliente</h1>
+            <h1>Consulta de Usuários</h1>
         </div>
         <div class='conteudo'>
             <div class='forms'>
-                <form method="POST" action='/clienteConsulta'>
+                <form method="POST" action='/userConsulta'>
                     <div class='linha'>
                         <div class='conjunto campoTamMed'>
                             <label class='label' for='nomeConsulta'>Consulta de Nome</label>
@@ -30,9 +30,8 @@
                             <td>Nome</td>
                             <td>CPF</td>
                             <td>Telefone</td>
-                            <td>Celular</td>
-                            <td>UF</td>
-                            <td>Cidade</td>
+                            <td>E-mail</td>
+                            <td>Login</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,12 +39,11 @@
                         if(data){
                         data.forEach(function(details) { %>
                         <tr class='linha1'>
-                            <td><a href='/clienteAlterar/<%= details._id %>'><%= details.nome %></a></td>
-                            <td><a href='/clienteAlterar/<%= details._id %>'><%= details.cpf %></a></td>
+                            <td><%= details.nome %></td>
+                            <td><%= details.cpf %></td>
                             <td><%= details.telefone %></td>
-                            <td><%= details.celular %></td>
-                            <td><%= details.uf %></td>
-                            <td><%= details.cidade %></td>
+                            <td><%= details.email %></td>
+                            <td><a href='/userAlterar/<%= details._id %>'><%= details.login %></a></td>
                         </tr>    
                     <% })} %>
                     </tbody>

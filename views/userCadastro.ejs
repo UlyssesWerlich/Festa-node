@@ -8,17 +8,22 @@
 
         <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
         <div class='title'>
-            <h1>Cadastro de Cliente</h1>
+            <h1>Cadastro de Usuário</h1>
         </div>
 
         <div class='conteudo'>
             <div class='forms'>
-                <form method='POST' action='/clienteCadastro'> 
+                <form method='POST' action='/userCadastro'> 
 
                     <div class='linha'>
-                        <div class='conjunto campoTamMax'>
+                        <div class='conjunto campoTamMed'>
                             <label class='label' for='nome'>Nome</label><br/>
                             <input autofocus class='campo' type='text' id='nome' name='nome'/>
+                        </div>
+
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='login'>Login</label><br/>
+                            <input class='campo' type='text' id='login' name='login'/>
                         </div>
                     </div>
 
@@ -52,34 +57,51 @@
                         </div>
                     </div>
 
-                    <div class='linha'>
-                        <div class='conjunto campoTamMin'>
-                            <label class='label' for='cep'>CEP</label><br/>
-                            <input class='campo' type='text' id='cep' name='cep'/>  
-                        </div>              
-                            
-                        <div class='conjunto campoTamMin'>
-                            <label class='label' for='uf'>UF</label><br/>
-                            <select class='campo' id="uf" name="uf">
-                                <option value=""></option>
-                                <option value="SC">SC</option>
-                                <option value="RS">RS</option>
-                                <option value="PR">PR</option>
-                            </select>
+                    <div class='subtitle'>
+                        <h2>Permissões</h2>
+                    </div>
+
+                    <div class="linha">
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='cep'>Festa</label><br/>
+                            <div class='checkbox'>
+                                <input type='checkbox' id='festaEditar' name='festaEditar'>Cadastro</input> 
+
+                                <input type='checkbox' id='festaConsultar' name='festaConsultar'>Consulta</input>  
+                            </div>
                         </div>
+
 
                         <div class='conjunto campoTamMed'>
-                            <label class='label' for='cidade'>Cidade</label><br/>
-                            <input class='campo' type='text' id='cidade' name='cidade'/>
-                        </div>
-                    </div>
+                            <label class='label' for='cep'>Cliente</label><br/>
+                            <div class='checkbox'>
+                                <input type='checkbox' id='clienteEditar' name='clienteEditar'>Cadastro</input> 
 
-                    <div class='linha'>
-                        <div class='conjunto campoTamMax'>
-                            <label class='label' for='endereco'>Endereço</label><br/>
-                            <input class='campo' type='text' id='endereco' name='endereco'/>
+                                <input type='checkbox' id='clienteConsultar' name='clienteConsultar'/>Consulta</input>
+                            </div>
                         </div>
-                    </div>
+                    </div>   
+                    
+                    <div class="linha">
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='cep'>Item</label><br/>
+                            <div class='checkbox'>
+                                <input type='checkbox' id='itemEditar' name='itemEditar'>Cadastro</input> 
+
+                                <input type='checkbox' id='itemConsultar' name='itemConsultar'>Consulta</input>  
+                            </div>
+                        </div>
+
+
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='cep'>Usuário</label><br/>
+                            <div class='checkbox'>
+                                <input type='checkbox' id='userEditar' name='userEditar'/>Cadastro</input> 
+
+                                <input type='checkbox' id='userConsultar' name='userConsultar'/>Consulta</input>
+                            </div>
+                        </div>
+                    </div>            
 
                     <div class='linha'>
                         <div class='conjunto'>

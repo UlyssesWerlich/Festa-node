@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../partials/header.ejs') %>
+    </head>
+    <body>
+
+        <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
+        
+        <form method='POST' action='/login'>
+
+            <input type='text' name='login' id='login' placeholder='Insira aqui seu login' />
+            <input type='password' name='senha' id='senha' />
+            <input type='submit' name='submit' id='submit' />
+
+        </form>
+
+        <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO -------------------------- -->
+
+    </body>
+    <footer>
+        <%- include('../partials/footer.ejs') %>
+        <%  if (mensagem){  %>
+            <script>alert('<%= mensagem %>')</script>
+        <% } %>
+    </footer>
+</html>

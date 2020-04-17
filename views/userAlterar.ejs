@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../partials/header.ejs') %>
+    </head>
+    <body>
+        <%- include('../partials/menu.ejs') %>
+
+        <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
+        <div class='title'>
+            <h1>Alterar dados de Usuário</h1>
+        </div>
+
+    <%    if(data){
+            data.forEach(function(details){   %>
+
+        <div class='conteudo'>
+            <div class='forms'>
+                <form method='POST' action='/userAlterar/<%= details._id %>'> 
+
+                    <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='nome'>Nome</label><br/>
+                            <input autofocus value='<%= details.nome %>' class='campo' type='text' id='nome' name='nome'/>
+                        </div>
+
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='login'>Login</label><br/>
+                            <input class='campo' value='<%= details.login %>' type='text' id='login' name='login'/>
+                        </div>
+                    </div>
+
+                    <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='cpf'>CPF</label><br/>
+                            <input class='campo' value='<%= details.cpf %>' type='text' id='cpf' name='cpf'/>
+                        </div>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='dataNascimento'>Nascimento</label><br/>
+                            <input class='campo' value='<%= details.dataNascimento %>' type='date' id='dataNascimento' name='dataNascimento'/>
+                        </div>
+                    </div>
+                    
+                    <div class='linha'>
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='telefone'>Telefone</label><br/>
+                            <input class='campo' value='<%= details.telefone %>' type='text' id='telefone' name='telefone'/>
+                        </div>
+                        
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='celular'>Celular</label><br/>
+                            <input class='campo' value='<%= details.celular %>'type='text' id='celular' name='celular'/>
+                        </div>
+                    </div>
+
+                    <div class='linha'>
+                        <div class='conjunto campoTamMax'>
+                            <label class='label' for='email'>E-mail</label><br/>
+                            <input class='campo' value='<%= details.email %>' type='text' id='email' name='email'/>
+                        </div>
+                    </div>
+
+                    <div class='subtitle'>
+                        <h2>Permissões</h2>
+                    </div>
+
+                    <div class="linha">
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='cep'>Festa</label><br/>
+                            <div class='checkbox'>
+                                <input <%= (details.permissao.festaEditar)?('checked'):('') %> type='checkbox' id='festaEditar' name='festaEditar'>Cadastro</input> 
+
+                                <input <%= (details.permissao.festaConsultar)?('checked'):('') %> type='checkbox' id='festaConsultar' name='festaConsultar'>Consulta</input>  
+                            </div>
+                        </div>
+
+
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='cep'>Cliente</label><br/>
+                            <div class='checkbox'>
+                                <input <%= (details.permissao.clienteEditar)?('checked'):('') %> type='checkbox' id='clienteEditar' name='clienteEditar'>Cadastro</input> 
+
+                                <input <%= (details.permissao.clienteConsultar)?('checked'):('') %> type='checkbox' id='clienteConsultar' name='clienteConsultar'/>Consulta</input>
+                            </div>
+                        </div>
+                    </div>   
+                    
+                    <div class="linha">
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='cep'>Item</label><br/>
+                            <div class='checkbox'>
+                                <input <%= (details.permissao.itensEditar)?('checked'):('') %> type='checkbox' id='itemEditar' name='itemEditar'>Cadastro</input> 
+
+                                <input <%= (details.permissao.itensConsultar)?('checked'):('') %> type='checkbox' id='itemConsultar' name='itemConsultar'>Consulta</input>  
+                            </div>
+                        </div>
+
+
+                        <div class='conjunto campoTamMed'>
+                            <label class='label' for='cep'>Usuário</label><br/>
+                            <div class='checkbox'>
+                                <input <%= (details.permissao.usersEditar)?('checked'):('') %> type='checkbox' id='userEditar' name='userEditar'/>Cadastro</input> 
+
+                                <input <%= (details.permissao.usersConsultar)?('checked'):('') %> type='checkbox' id='userConsultar' name='userConsultar'/>Consulta</input>
+                            </div>
+                        </div>
+                    </div>             
+
+                    <div class='linha'>
+                        <div class='conjunto'>
+                            <input type='submit' class='botao botaoAlterar' value='Alterar' name='alterar'/>
+                        </div>
+                    </form>
+
+                    <div class='conjunto'>
+                        <a class='botao botaoExcluir' href="/userExcluir/<%= details._id %>">Excluir</a>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+        <% })} %>
+        <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO ------------------------- -->
+    </body>
+    <footer>
+        <%- include('../partials/footer.ejs') %>
+    </footer>
+</html>

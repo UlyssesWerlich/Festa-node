@@ -13,12 +13,12 @@ module.exports = {
     
         var data = new itens(item);  
         data.save().then(function(result){
-            res.render('itemCadastro.ejs', {mensagem: true,
-                conteudo: "Item cadastrado com sucesso"});
+            res.render('itemCadastro.ejs', {
+                mensagem: "Item cadastrado com sucesso"});
         }).catch((err) => {
             console.log(err);
-            res.render('itemCadastro.ejs', {mensagem: true,
-                conteudo: "Não foi possível cadastrar esse item. Favor verificar os campos preenchidos e tentar novamente"});
+            res.render('itemCadastro.ejs', {
+                mensagem: "Não foi possível cadastrar esse item. Favor verificar os campos preenchidos e tentar novamente"});
         }); 
     },
 
@@ -32,8 +32,8 @@ module.exports = {
             res.render('itemConsulta.ejs', {data: result, mensagem: false})
         }).catch((err) => {
             console.log(err);
-            res.render('itemConsulta.ejs', {mensagem: true,
-                conteudo: "Não foi possível realizar a consulta. Favor verificar os campos preenchidos e tentar novamente"});
+            res.render('itemConsulta.ejs', {data: false, 
+                mensagem: "Não foi possível realizar a consulta. Favor verificar os campos preenchidos e tentar novamente"});
         }); 
     },
 
@@ -57,12 +57,11 @@ module.exports = {
                 descricao: req.body.descricao,
                 _visible: true,
         }}  ).then(function(result){
-            res.render('itemConsulta.ejs', {data: false, mensagem: true,
-                conteudo: "Sucesso na alteração de dados do item"});
+            res.render('itemConsulta.ejs', {data: false, mensagem: "Sucesso na alteração de dados do item"});
         }).catch((err) => {
             console.log(err);
-            res.render('itemConsulta.ejs', {data: false, mensagem: true,
-                conteudo: "Não foi possível alterar dados. Favor verificar os campos preenchidos e tentar novamente"});
+            res.render('itemConsulta.ejs', {data: false, 
+                mensagem: "Não foi possível alterar dados. Favor verificar os campos preenchidos e tentar novamente"});
         });
     },
 
@@ -70,12 +69,11 @@ module.exports = {
         var id = { "_id": req.params.id}
         itens.deleteOne(id)
         .then(function(result){
-            res.render('itemConsulta.ejs', {data: false, mensagem: true, 
-                conteudo: "Item excluído com sucesso"})
+            res.render('itemConsulta.ejs', {data: false, mensagem: "Item excluído com sucesso"})
         }).catch((err) => {
             console.log(err)
-            res.render('itemConsulta.ejs', {data: false, mensagem: true, 
-                conteudo: "Falha ao excluir item, favor tentar novamente"});
+            res.render('itemConsulta.ejs', {data: false, 
+                mensagem: "Falha ao excluir item, favor tentar novamente"});
         })
     },
 
