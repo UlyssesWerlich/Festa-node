@@ -6,17 +6,17 @@
             <ul>
                 <ul class="link"><a href="/index">Página inicial</a></ul>
                 <ul class="submenu">Consulta</ul> 
-                <ul class="link"><a href="/agenda">Agenda</a></ul>
-                <ul class="link"><a href="/festaConsulta">Festa</a></ul>
-                <ul class="link"><a href="/clienteConsulta">Cliente</a></ul>
-                <ul class="link"><a href="/itemConsulta">Item</a></ul>
+                <% if (permissao.festaConsultar) { %> <ul class="link"><a href="/agenda">Agenda</a></ul> <% } %>
+                <% if (permissao.festaConsultar) { %> <ul class="link"><a href="/festaConsulta">Festa</a></ul> <% } %>
+                <% if (permissao.clienteConsultar) { %> <ul class="link"><a href="/clienteConsulta">Cliente</a></ul> <% } %>
+                <% if (permissao.itensConsultar) { %> <ul class="link"><a href="/itemConsulta">Item</a></ul> <% } %>
                 <ul class="submenu">Cadastro</ul>
-                <ul class="link"><a href="/festaCadastro">Festa</a></ul>
-                <ul class="link"><a href="/clienteCadastro">Cliente</a></ul>
-                <ul class="link"><a href="/itemCadastro">Item</a></ul>
+                <% if (permissao.festaEditar) { %> <ul class="link"><a href="/festaCadastro">Festa</a></ul> <% } %>
+                <% if (permissao.clienteEditar) { %> <ul class="link"><a href="/clienteCadastro">Cliente</a></ul> <% } %>
+                <% if (permissao.itensEditar) { %> <ul class="link"><a href="/itemCadastro">Item</a></ul> <% } %>
                 <ul class="submenu">Adminstrativo</ul>
-                <ul class="link"><a href="/userConsulta">Usuários</a></ul>
-                <ul class="link"><a href="/userCadastro">Cadastrar usuário</a></ul>
+                <% if (permissao.usersConsultar) { %> <ul class="link"><a href="/userConsulta">Usuários</a></ul> <% } %>
+                <% if (permissao.usersEditar) { %> <ul class="link"><a href="/userCadastro">Cadastrar usuário</a></ul> <% } %>
                 <ul class="link"><a href="/userSenha">Alterar senha</a></ul>
                 <ul class="link"><a href="/logoff">Sair</a></ul>
             </ul>

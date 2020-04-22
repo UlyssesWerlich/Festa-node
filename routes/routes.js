@@ -20,7 +20,7 @@ routes.post('/login' , passport.authenticate('local',
 );
 
 routes.get('/index', authentication() ,(req, res) =>{
-    res.render('index.ejs', {mensagem: false});
+    res.render('index.ejs', {permissao: req.user.permissao, mensagem: false});
 });
 
 routes.get('/logoff', function(req, res, next){
@@ -31,13 +31,13 @@ routes.get('/logoff', function(req, res, next){
 //================================= ROTAS RELACIONADAS A USUÁRIOS =================================
 
 routes.get('/userCadastro', authentication(), permission('usersEditar'), (req, res) =>{ 
-        res.render('userCadastro.ejs', {mensagem: false})   
+        res.render('userCadastro.ejs', {permissao: req.user.permissao, mensagem: false})   
 })
 
 routes.post('/userCadastro', authentication(), permission('usersEditar'), usersController.adicionar);
 
 routes.get('/userConsulta', authentication(), permission('usersConsultar'), (req, res) =>{
-    res.render('userConsulta.ejs', {data: false, mensagem: false})
+    res.render('userConsulta.ejs', {permissao: req.user.permissao, data: false, mensagem: false})
 })
 
 routes.post('/userConsulta', authentication(), permission('usersConsultar'), usersController.consultar);
@@ -47,7 +47,8 @@ routes.get('/userAlterar/:id', authentication(), permission('usersConsultar'), u
 routes.post('/userAlterar/:id', authentication(), permission('usersEditar'), usersController.alterar);
 
 routes.get('/userSenha', authentication(), (req, res) => { res.render('userSenha.ejs', {
-    mensagem: false, id: req.user._id, nome: req.user.nome, login: req.user.login, cpf: req.user.cpf})});
+    permissao: req.user.permissao, mensagem: false, 
+    id: req.user._id, nome: req.user.nome, login: req.user.login, cpf: req.user.cpf})});
 
 routes.post('/userSenha/:id', authentication(), usersController.alterarSenha);
 
@@ -56,13 +57,13 @@ routes.get('/userExcluir/:id',authentication(), permission('usersEditar'), users
 //================================= ROTAS RELACIONADAS A CLIENTES =================================
 
 routes.get('/clienteCadastro', authentication(), permission('clienteEditar'), (req, res) =>{
-    res.render('clienteCadastro.ejs', {mensagem: false, permissao: req.user.permissao})
+    res.render('clienteCadastro.ejs', {permissao: req.user.permissao, mensagem: false, permissao: req.user.permissao})
 })
 
 routes.post('/clienteCadastro', authentication(), permission('clienteEditar'), clientesController.adicionar);
 
 routes.get('/clienteConsulta', authentication(), permission('clienteConsultar'), (req, res) =>{
-    res.render('clienteConsulta.ejs', {data: false, mensagem: false})
+    res.render('clienteConsulta.ejs', {permissao: req.user.permissao, data: false, mensagem: false})
 })
 
 routes.post('/clienteConsulta', authentication(), permission('clienteConsultar'), clientesController.consultar);
@@ -78,13 +79,13 @@ routes.get('/clienteValidar', authentication(), permission('clienteEditar'), cli
 //================================= ROTAS RELACIONADAS A FESTA =================================
 
 routes.get('/festaCadastro', authentication(), permission('festaEditar'), (req, res) =>{
-    res.render('festaCadastro.ejs', {mensagem: false})
+    res.render('festaCadastro.ejs', {permissao: req.user.permissao, mensagem: false})
 })
 
 routes.post('/festaCadastro', authentication(), permission('festaEditar'), festasController.adicionar);
 
 routes.get('/festaConsulta', authentication(), permission('festaConsultar'), (req, res) =>{
-    res.render('festaConsulta.ejs', {data: false, mensagem: false})
+    res.render('festaConsulta.ejs', {permissao: req.user.permissao, data: false, mensagem: false})
 })
 
 routes.post('/festaConsulta', authentication(), permission('festaConsultar'), festasController.consultar);
@@ -102,13 +103,13 @@ routes.post('/festaAdicionarItens/:id', authentication(), permission('festaEdita
 //================================= ROTAS RELACIONADAS A ITENS =================================
 
 routes.get('/itemCadastro', authentication(), permission('itensEditar'), (req, res) =>{
-    res.render('itemCadastro.ejs', {mensagem: false})
+    res.render('itemCadastro.ejs', {permissao: req.user.permissao, mensagem: false})
 })
 
 routes.post('/itemCadastro', authentication(), permission('itensEditar'), itensController.adicionar);
 
 routes.get('/itemConsulta', authentication(), permission('itensConsultar'), (req, res) =>{
-    res.render('itemConsulta.ejs', {data: false, mensagem: false})
+    res.render('itemConsulta.ejs', {permissao: req.user.permissao, data: false, mensagem: false})
 })
 
 routes.post('/itemConsulta', authentication(), permission('itensConsultar'), itensController.consultar);
@@ -124,7 +125,7 @@ routes.get('/ajaxFestaItens', authentication(), itensController.ajaxConsultar);
 // ================================= ROTAS RELACIONADAS A AGENDA =================================
 
 routes.get('/agenda', authentication(), permission('festaConsultar'), (req, res) =>{
-    res.render('agenda.ejs', {result: false});
+    res.render('agenda.ejs', {permissao: req.user.permissao, result: false});
 })
 
 routes.post('/agenda', authentication(), permission('festaConsultar'), festasController.consultarPorData);

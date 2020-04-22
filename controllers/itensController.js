@@ -13,11 +13,11 @@ module.exports = {
     
         var data = new itens(item);  
         data.save().then(function(result){
-            res.render('itemCadastro.ejs', {
+            res.render('itemCadastro.ejs', { permissao: req.user.permissao,
                 mensagem: "Item cadastrado com sucesso"});
         }).catch((err) => {
             console.log(err);
-            res.render('itemCadastro.ejs', {
+            res.render('itemCadastro.ejs', { permissao: req.user.permissao,
                 mensagem: "Não foi possível cadastrar esse item. Favor verificar os campos preenchidos e tentar novamente"});
         }); 
     },
@@ -29,10 +29,10 @@ module.exports = {
                       "_visible": true,}
         itens.find(busca)
         .then(function(result){
-            res.render('itemConsulta.ejs', {data: result, mensagem: false})
+            res.render('itemConsulta.ejs', {permissao: req.user.permissao, data: result, mensagem: false})
         }).catch((err) => {
             console.log(err);
-            res.render('itemConsulta.ejs', {data: false, 
+            res.render('itemConsulta.ejs', {permissao: req.user.permissao, data: false, 
                 mensagem: "Não foi possível realizar a consulta. Favor verificar os campos preenchidos e tentar novamente"});
         }); 
     },
@@ -41,7 +41,7 @@ module.exports = {
         var busca = { "_id": req.params.id}
         itens.find(busca)
         .then(function(result){
-            res.render('itemAlterar.ejs', {data: result})
+            res.render('itemAlterar.ejs', {permissao: req.user.permissao, data: result})
         }).catch((err) => {
             return console.log(err)
         })
@@ -57,10 +57,12 @@ module.exports = {
                 descricao: req.body.descricao,
                 _visible: true,
         }}  ).then(function(result){
-            res.render('itemConsulta.ejs', {data: false, mensagem: "Sucesso na alteração de dados do item"});
+            res.render('itemConsulta.ejs', {permissao: req.user.permissao, data: false, 
+                mensagem: "Sucesso na alteração de dados do item"
+            });
         }).catch((err) => {
             console.log(err);
-            res.render('itemConsulta.ejs', {data: false, 
+            res.render('itemConsulta.ejs', {permissao: req.user.permissao, data: false, 
                 mensagem: "Não foi possível alterar dados. Favor verificar os campos preenchidos e tentar novamente"});
         });
     },
@@ -69,11 +71,14 @@ module.exports = {
         var id = { "_id": req.params.id}
         itens.deleteOne(id)
         .then(function(result){
-            res.render('itemConsulta.ejs', {data: false, mensagem: "Item excluído com sucesso"})
+            res.render('itemConsulta.ejs', {permissao: req.user.permissao, data: false, 
+                mensagem: "Item excluído com sucesso"
+            })
         }).catch((err) => {
             console.log(err)
-            res.render('itemConsulta.ejs', {data: false, 
-                mensagem: "Falha ao excluir item, favor tentar novamente"});
+            res.render('itemConsulta.ejs', {permissao: req.user.permissao, data: false, 
+                mensagem: "Falha ao excluir item, favor tentar novamente"
+            });
         })
     },
 

@@ -38,10 +38,12 @@ module.exports = {
           };  
           var data = new users(user);  
           data.save().then(function(result){
-            res.render('userCadastro.ejs', {mensagem: "Usuário cadastrado com sucesso"});
+            res.render('userCadastro.ejs', {permissao: req.user.permissao, 
+                mensagem: "Usuário cadastrado com sucesso"
+            });
         }).catch((err) => {
             console.log(err);
-            res.render('userCadastro.ejs', {
+            res.render('userCadastro.ejs', { permissao: req.user.permissao,
                 mensagem: "Não foi possível cadastrar esse Usuário. Favor verificar os campos preenchidos e tentar novamente"});
         }); 
     },
@@ -51,10 +53,10 @@ module.exports = {
                     "_visible": true}
         users.find(busca)
             .then(function(result){
-                res.render('userConsulta.ejs', {data: result, mensagem: false})
+                res.render('userConsulta.ejs', {permissao: req.user.permissao, data: result, mensagem: false})
         }).catch((err) => {
             console.log(err);
-            res.render('userConsulta.ejs', { data: false,
+            res.render('userConsulta.ejs', {permissao: req.user.permissao, data: false,
                 mensagem: "Não foi possível realizar a consulta. Favor verificar os campos preenchidos e tentar novamente"});
         }); 
     },
@@ -63,7 +65,7 @@ module.exports = {
         var busca = { "_id": req.params.id}
         users.find(busca)
         .then(function(result){
-            res.render('userAlterar.ejs', {data: result})
+            res.render('userAlterar.ejs', {permissao: req.user.permissao, data: result})
         }).catch((err) => {
             return console.log(err)
         })
@@ -104,10 +106,12 @@ module.exports = {
                 },
             }})
             .then(function(result){
-                res.render('userConsulta.ejs', {data: false, mensagem: "Sucesso na alteração de dados do usuário"});
+                res.render('userConsulta.ejs', {permissao: req.user.permissao, data: false, 
+                    mensagem: "Sucesso na alteração de dados do usuário"
+                });
             }).catch((err) => {
                 console.log(err);
-                res.render('userConsulta.ejs', {data: false, 
+                res.render('userConsulta.ejs', {permissao: req.user.permissao, data: false, 
                     mensagem: "Não foi possível alterar dados. Favor verificar os campos preenchidos e tentar novamente"});
             });
     },
@@ -126,17 +130,23 @@ module.exports = {
                             senha: cryptPwd,
                         }})
                         .then(function(result){
-                            res.render('userConsulta.ejs', {data: false, mensagem:"Senha alterada com sucesso"});
+                            res.render('userConsulta.ejs', {permissao: req.user.permissao, data: false, 
+                                mensagem:"Senha alterada com sucesso"
+                            });
                         }).catch((err) => {
                             console.log(err);
-                            res.render('userConsulta.ejs', {data: false, 
+                            res.render('userConsulta.ejs', {permissao: req.user.permissao, data: false, 
                                 mensagem: "Não foi possível alterar senha. Favor verificar os campos preenchidos e tentar novamente"});
                         });
                 } else {
-                    res.render('userConsulta.ejs', {data: false, mensagem: "Senha inválida, favor tentar novamente"});
+                    res.render('userConsulta.ejs', {permissao: req.user.permissao, data: false, 
+                        mensagem: "Senha inválida, favor tentar novamente"
+                    });
                 }
             } else {
-                res.render('userConsulta.ejs', {data: false, mensagem: "Usuário não encontrado, favor tentar novamente"});
+                res.render('userConsulta.ejs', {permissao: req.user.permissao, data: false, 
+                    mensagem: "Usuário não encontrado, favor tentar novamente"
+                });
             }
     })},
 
@@ -146,10 +156,14 @@ module.exports = {
                 _visible: false,
         }   })
         .then(function(result){
-            res.render('userConsulta.ejs', {data: false, mensagem: "Usuário excluído com sucesso"})
+            res.render('userConsulta.ejs', {permissao: req.user.permissao, data: false, 
+                mensagem: "Usuário excluído com sucesso"
+            })
         }).catch((err) => {
             console.log(err)
-            res.render('userConsulta.ejs', {data: false, mensagem: "Falha ao excluir usuário, favor tentar novamente"});
+            res.render('userConsulta.ejs', {permissao: req.user.permissao, data: false, 
+                mensagem: "Falha ao excluir usuário, favor tentar novamente"
+            });
         })
     },
 }

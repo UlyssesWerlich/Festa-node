@@ -10,10 +10,10 @@ module.exports = {
                 if (result.senha === req.body.senha){
                     res.render('index.ejs');
                 } else {
-                    res.render('login.ejs', {mensagem: true, conteudo: "Senha inválida, favor tentar novamente"});
+                    res.render('login.ejs', {permissao: req.user.permissao, mensagem: true, conteudo: "Senha inválida, favor tentar novamente"});
                 }
             } else {
-                res.render('login.ejs', {mensagem: true, conteudo: "Usuário não encontrado, favor tentar novamente"});
+                res.render('login.ejs', {permissao: req.user.permissao, mensagem: true, conteudo: "Usuário não encontrado, favor tentar novamente"});
             }
         }).catch((err) => {
             return console.log(err)
