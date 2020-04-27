@@ -167,7 +167,7 @@ function permission (permissao) {
                 if (req.user.permissao.usersEditar) { return next() }
                 break;
           }
-        res.render('index.ejs', {mensagem: "Sem permissao de acesso"})
+        res.render('index.ejs', {permissao: req.user.permissao, mensagem: "Sem permissao de acesso"})
     }
 }
 
