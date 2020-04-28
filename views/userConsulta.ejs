@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%- include('../partials/header.ejs') %>
+        <%- include('../includes/header.ejs') %>
     </head>
     <body>
-        <%- include('../partials/menu.ejs') %>
+        <%- include('../includes/menu.ejs') %>
         <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
         <div class='title'>
             <h1>Consulta de Usuários</h1>
@@ -53,7 +53,7 @@
         <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO -------------------------- -->
     </body>
     <footer>
-        <%- include('../partials/footer.ejs') %>
+        <%- include('../includes/footer.ejs') %>
         <%  if (mensagem){  %>
             <script>alert('<%= mensagem %>')</script>
         <% } %>
