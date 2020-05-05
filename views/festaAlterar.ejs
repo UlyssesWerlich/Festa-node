@@ -117,12 +117,17 @@
                     <div class='linha'>
                         <div class='conjunto'>
                             <input class='botao botaoAlterar' type='submit' value='Alterar' name='alterar'/>
+                            </form>
                         </div>
                         <div class='conjunto'>
-                            <button class='botao botaoConsulta'><a href="/festaAdicionarItens/<%= details._id %>">Lista de Itens</a></button>
+                            <form method='GET' action="/festaAdicionarItens/<%= details._id %>" >
+                                <button class='botao botaoConsulta'>Lista de Itens</button>
+                            </form>
                         </div>
                         <div class='conjunto'>
-                            <button class='botao botaoExcluir'><a href="/festaExcluir/<%= details._id %>">Excluir</a></button>
+                            <form method='GET' action="/festaExcluir/<%= details._id %>" >
+                                <button class='botao botaoExcluir'>Excluir</button>
+                            </form>
                         </div>
                     </div>
                 </form>

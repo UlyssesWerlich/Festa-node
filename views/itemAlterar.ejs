@@ -58,9 +58,12 @@
                     <div class='linha'>
                         <div class="conjunto">
                             <input type="submit" class='botao botaoAlterar' name="alterar" value="Alterar">
+                        </form>
                         </div>  
                         <div class="conjunto">
-                            <button class='botao botaoExcluir'><a href="/itemExcluir/<%= details._id %>">Excluir</a></button>
+                            <form method='GET' action="/itemExcluir/<%= details._id %>" >
+                                <button class='botao botaoExcluir'>Excluir</button>
+                            </form>
                         </div>
                     </div>
                 </form>

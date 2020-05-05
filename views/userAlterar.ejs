@@ -113,7 +113,9 @@
                     </form>
 
                     <div class='conjunto'>
-                        <a class='botao botaoExcluir' href="/userExcluir/<%= details._id %>">Excluir</a>
+                        <form method='GET' action="/userExcluir/<%= details._id %>" >
+                            <button class='botao botaoExcluir'>Excluir</button>
+                        </form>
                     </div>
                 </div>
             
