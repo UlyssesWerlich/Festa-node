@@ -90,7 +90,7 @@ module.exports = {
                     }
         itens.find(busca).limit(3)
         .then(function(result){
-            res.render('../ajax/ajaxFestaItens.ejs', {data: result})
+            res.render('../views/ajax/festaItens.ejs', {data: result})
         }).catch((err) => {
             return console.log(err)
         }); 

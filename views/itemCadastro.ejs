@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%- include('../includes/header.ejs') %>
+        <%- include('./includes/header.ejs') %>
     </head>
     <body>
-        <%- include('../includes/menu.ejs') %>
+        <%- include('./includes/menu.ejs') %>
 
         <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
 
@@ -49,19 +49,38 @@
                             <label class='label' for='descricao'>Descrição do Item</label>
                             <textarea class='texto' id='descricao' name='descricao'></textarea>
                         </div>
-                    </div>
+                    </div>  
 
                     <div class='linha'>
                         <div class="conjunto">
                             <input type="submit" class='botao botaoAlterar' name="Botao" value="Cadastrar">
                         </div>
                     </div>
+
+                    <div class='subtitle'>
+                        <h2>Imagens do Item</h2>
+                    </div>
+
+                    <div class='linha'>
+                        <div class="conjunto campoTamMed">
+                            <input type="file" class='file' id='foto1' name='foto1'/>
+                        </div>
+
+                        <div class="conjunto campoTamMed">
+                            <input type="file" class='file' id='foto2' name='foto2'/>
+                        </div>
+
+                        <div class="conjunto campoTamMed">
+                            <input type="file" class='file' id='foto3' name='foto3'/>
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>
     </body>
     <footer>
-        <%- include('../includes/footer.ejs') %>
+        <%- include('./includes/footer.ejs') %>
         <%  if (mensagem){  %>
             <script>alert('<%= mensagem %>')</script>
         <% } %>

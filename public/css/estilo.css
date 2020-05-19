@@ -243,3 +243,38 @@ a:visited {
     margin: 8px 4px 0px 8px;
     font-size: 17px;
 }
+
+.list ul {
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) ;
+    grid-gap: 24px;
+    list-style: none;
+    margin-top: 15px;
+}
+
+.list li {
+    background: #e2f3f3;
+    padding: 12px;
+    border-style: solid;
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: #75bac5;
+}
+
+.list ul li strong{
+    display: block;
+    margin-bottom: 2px;
+    color:#116; 
+}
+
+.list ul li p + strong{
+    margin-top: 8px;
+}
+
+.list ul li p {
+    padding-left: 15px;
+    color: #006a7a;
+    line-height: 21px;
+    font-size: 16px;
+}

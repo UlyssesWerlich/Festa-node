@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%- include('../includes/header.ejs') %>
+        <%- include('./includes/header.ejs') %>
     </head>
     <body>
-        <%- include('../includes/menu.ejs') %>
+        <%- include('./includes/menu.ejs') %>
         <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
         <div class='title'>
             <h1>Consulta de Usuários</h1>
@@ -23,37 +23,37 @@
                     </div>
                 </form>
             </div>
-            <div class='table'>
-                <table class='tabela'>
-                    <thead>
-                        <tr class='linhaCabecalho'>
-                            <td>Nome</td>
-                            <td>CPF</td>
-                            <td>Telefone</td>
-                            <td>E-mail</td>
-                            <td>Login</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <% 
-                        if(data){
-                        data.forEach(function(details) { %>
-                        <tr class='linha1'>
-                            <td><%= details.nome %></td>
-                            <td><%= details.cpf %></td>
-                            <td><%= details.telefone %></td>
-                            <td><%= details.email %></td>
-                            <td><a href='/userAlterar/<%= details._id %>'><%= details.login %></a></td>
-                        </tr>    
-                    <% })} %>
-                    </tbody>
-                </table>
+            
+            <div class='list'>
+                <ul>
+<% 
+                if(data){
+                    data.forEach(function(details) { %>
+
+                    <li>
+                        <strong>Nome</strong>
+                        <p><%= details.nome %></p>
+
+                        <strong>Login</strong>
+                        <p><a href='/userAlterar/<%= details._id %>'><%= details.login %></a></p>
+
+                        <strong>CPF</strong>
+                        <p><%= details.cpf %></p>
+
+                        <strong>Telefone</strong>
+                        <p><%= details.telefone %></p>
+
+                        <strong>E-mail</strong>
+                        <p><%= details.email %></p>
+                    </li>
+                <% })} %>
+                </ul>
             </div>
         </div>
         <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO -------------------------- -->
     </body>
     <footer>
-        <%- include('../includes/footer.ejs') %>
+        <%- include('./includes/footer.ejs') %>
         <%  if (mensagem){  %>
             <script>alert('<%= mensagem %>')</script>
         <% } %>

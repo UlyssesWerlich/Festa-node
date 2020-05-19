@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%- include('../includes/header.ejs') %>
+        <%- include('./includes/header.ejs') %>
     </head>
     <body>
-        <%- include('../includes/menu.ejs') %>
+        <%- include('./includes/menu.ejs') %>
 
         <!-- ------------------------- AQUI COMEÇA O BLOCO DE CONTEUDO -------------------------- -->
         <% if (data){ 
@@ -105,7 +105,7 @@ if(details.itens){
         <!-- ------------------------- AQUI TERMINA O BLOCO DE CONTEUDO ------------------------- -->
     </body>
     <footer>
-        <%- include('../includes/footer.ejs') %>
+        <%- include('./includes/footer.ejs') %>
         <script src='/js/request.js'></script>
         <script>
             function adicionarLinha(id, item, tipo, tema, preco) {
@@ -135,7 +135,7 @@ if(details.itens){
                 if (item.length > 2 || tipo.length > 2 || tema.length > 2) {
                     var result = document.getElementById("resultado");
                     var xmlreq = CriarRequest();
-                    xmlreq.open("GET", "/ajaxFestaItens?item=" + item + "&tipo=" + tipo + "&tema=" + tema , true);
+                    xmlreq.open("GET", "/getFestaItens?item=" + item + "&tipo=" + tipo + "&tema=" + tema , true);
                     xmlreq.onreadystatechange = function(){
 
                     if (xmlreq.status == 200)

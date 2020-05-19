@@ -120,7 +120,7 @@ routes.post('/itemAlterar/:id', authentication(), permission('itensEditar'), ite
 
 routes.get('/itemExcluir/:id', authentication(), permission('itensEditar'), itensController.excluir);
 
-routes.get('/ajaxFestaItens', authentication(), itensController.ajaxConsultar);
+routes.get('/getFestaItens', authentication(), itensController.ajaxConsultar);
 
 // ================================= ROTAS RELACIONADAS A AGENDA =================================
 
