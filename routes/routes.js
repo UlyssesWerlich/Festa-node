@@ -141,33 +141,10 @@ function authentication () {
 
 function permission (permissao) {  
     return function (req, res, next) {
-        switch (permissao) {
-            case 'festaConsultar':
-                if (req.user.permissao.festaConsultar) { return next() }
-                break;
-            case 'festaEditar':
-                if (req.user.permissao.festaEditar) { return next() }
-                break;
-            case 'clienteConsultar':
-                if (req.user.permissao.clienteConsultar) { return next() }
-                break;
-            case 'clienteEditar':
-                if (req.user.permissao.clienteEditar) { return next() }
-                break;
-            case 'itensConsultar':
-                if (req.user.permissao.itensConsultar) { return next() }
-                break;
-            case 'itensEditar':
-                if (req.user.permissao.itensEditar) { return next() }
-                break;
-            case 'usersConsultar':
-                if (req.user.permissao.usersConsultar) { return next() }
-                break;
-            case 'usersEditar':
-                if (req.user.permissao.usersEditar) { return next() }
-                break;
-          }
-        res.render('index.ejs', {permissao: req.user.permissao, mensagem: "Sem permissao de acesso"})
+        if (req.user.permissao[permissao]) 
+            return next(); 
+        else 
+            res.render('index.ejs', {permissao: req.user.permissao, mensagem: "Sem permissao de acesso"})
     }
 }
 
