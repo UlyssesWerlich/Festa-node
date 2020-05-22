@@ -13,7 +13,7 @@
         </div>
         <div class='conteudo'>
             <div class="forms">
-                <form name="form2" method="POST" action="/itemCadastro">
+                <form name="form2" method="POST" action="/itemCadastro" enctype="multipart/form-data">
                     <div class='linha'>
                         <div class="conjunto campoTamMax">
                             <label class='label' for='item'>Item</label>
@@ -63,15 +63,7 @@
 
                     <div class='linha'>
                         <div class="conjunto campoTamMed">
-                            <input type="file" class='file' id='foto1' name='foto1'/>
-                        </div>
-
-                        <div class="conjunto campoTamMed">
-                            <input type="file" class='file' id='foto2' name='foto2'/>
-                        </div>
-
-                        <div class="conjunto campoTamMed">
-                            <input type="file" class='file' id='foto3' name='foto3'/>
+                            <input type="file" class='file' name='image'/>
                         </div>
                     </div>
 

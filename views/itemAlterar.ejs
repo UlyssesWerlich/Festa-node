@@ -17,7 +17,7 @@
         %>
         <div class='conteudo'>
             <div class="forms">
-                <form name="form2" method="POST" action="/itemAlterar/<%= details._id %>">
+                <form name="form2" method="POST" action="/itemAlterar/<%= details._id %>" enctype="multipart/form-data">
                     <div class='linha'>
                         <div class="conjunto campoTamMax">
                             <label class='label' for='item'>Item</label>
@@ -54,19 +54,33 @@
                             <textarea class='texto' id='descricao' name='descricao'><%= details.descricao %></textarea>
                         </div>
                     </div>
+                    <br/>
+
+                    <div class='subtitle'>
+                        <h2>Imagens do Item</h2>
+                    </div>
+
+            <% if(details.foto !== '0'){ %>
+                    <img src='<%= details.foto %>' alt='Foto'>
+            <% } %>
 
                     <div class='linha'>
-                        <div class="conjunto">
-                            <input type="submit" class='botao botaoAlterar' name="alterar" value="Alterar">
-                        </form>
-                        </div>  
-                        <div class="conjunto">
-                            <form method='GET' action="/itemExcluir/<%= details._id %>" >
-                                <button class='botao botaoExcluir'>Excluir</button>
-                            </form>
+                        <div class="conjunto campoTamMed">
+                            <input type="file" class='file' name='image'/>
                         </div>
                     </div>
-                </form>
+                
+                <div class='linha'>
+                    <div class="conjunto">
+                        <input type="submit" class='botao botaoAlterar' name="alterar" value="Alterar">
+                    </form>
+                    </div>  
+                    <div class="conjunto">
+                        <form method='GET' action="/itemExcluir/<%= details._id %>" >
+                            <button class='botao botaoExcluir'>Excluir</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
         <% })} %>

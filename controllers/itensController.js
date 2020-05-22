@@ -1,16 +1,28 @@
 const itens = require('../database/itensSchema');
+const filehelper = require('../util/file-helper');
+const fs = require('fs');
 
 module.exports = {
-
+    
     async adicionar(req, res) {
+
+        if (req.file) {
+            filehelper.compressImage(req.file, 500)
+            .catch(err => {
+                console.log(err)
+                res.render('itemCadastro.ejs', {permissao: req.user.permissao,
+                    mensagem : "Erro ao fazer a compressão da imagem."});
+            });
+        }
+
         var item = {  
             item: req.body.item,  
             tipo: req.body.tipo,
             tema: req.body.tema,
             preco: req.body.preco,
-            descricao: req.body.descricao
+            descricao: req.body.descricao,
+            foto: (req.file) ? ("/images/" + req.file.filename + ".jpg") : '0'
           };  
-    
         var data = new itens(item);  
         data.save().then(function(result){
             res.render('itemCadastro.ejs', { permissao: req.user.permissao,
@@ -48,6 +60,23 @@ module.exports = {
     },
 
     async alterar(req, res){
+        if (req.file) {
+            itens.findOne({ "_id": req.params.id})
+            .select('foto')
+            .then(result => {
+                fs.unlink('public' + result.foto, err => {
+                    if(err) console.log(err)
+                })
+            })
+
+            filehelper.compressImage(req.file, 500)
+            .catch(err => {
+                console.log(err)
+                res.render('itemCadastro.ejs', {permissao: req.user.permissao,
+                    mensagem : "Erro ao fazer a compressão da imagem."});
+            });
+        }
+
         itens.updateOne({ "_id": req.params.id},  { 
             $set: {
                 item: req.body.item,  
@@ -55,6 +84,7 @@ module.exports = {
                 tema: req.body.tema,
                 preco: req.body.preco,
                 descricao: req.body.descricao,
+                foto: (req.file) ? ("/images/" + req.file.filename + ".jpg") : '0',
                 _visible: true,
         }}  ).then(function(result){
             res.render('itemConsulta.ejs', {permissao: req.user.permissao, data: false, 
@@ -69,6 +99,14 @@ module.exports = {
 
     async excluir(req,res){
         var id = { "_id": req.params.id}
+        itens.findOne(id)
+        .select('foto')
+        .then(result => {
+            fs.unlink('public' + result.foto, err => {
+                if(err) console.log(err)
+            })
+        })
+
         itens.deleteOne(id)
         .then(function(result){
             res.render('itemConsulta.ejs', {permissao: req.user.permissao, data: false, 

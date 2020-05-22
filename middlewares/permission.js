@@ -1,4 +1,4 @@
-function enable (permissao) {  
+module.exports = function enable (permissao) {  
     return function (req, res, next) {
         if (req.user.permissao[permissao]) 
             return next(); 

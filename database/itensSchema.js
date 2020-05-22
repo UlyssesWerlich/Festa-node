@@ -7,6 +7,7 @@ const schemaItem = new Schema({
     tema: String,
     preco: String,
     descricao: String,
+    foto: String,
     _visible: {type: Boolean,
         default: true}
 }, {collection: 'itens'})

@@ -7,7 +7,7 @@ var logger = require('morgan');
 const routes = require('./routes/routes');
 
 const passport = require('passport')  
-require('./auth')(passport);
+require('./config/auth')(passport);
 const session = require('express-session')  
 const MongoStore = require('connect-mongo')(session)
 
